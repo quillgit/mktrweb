@@ -1,0 +1,140 @@
+RewriteEngine On
+
+ErrorDocument 404 /index.php?sct=404
+
+RewriteRule (.*)\.xml(.*) $1.php$2 [nocase]
+
+RewriteRule ^profil_kami index.php?sct=profil_kami
+
+RewriteRule ^logo_kami index.php?sct=logo_kami
+
+RewriteRule ^visi_misi index.php?sct=visi_misi
+
+RewriteRule ^peristiwa_penting index.php?sct=peristiwa_penting
+
+RewriteRule ^struktur_kepemilikan index.php?sct=struktur_kepemilikan
+
+RewriteRule ^struktur_organisasi index.php?sct=struktur_organisasi
+
+RewriteRule ^dewan_komisaris index.php?sct=dewan_komisaris
+
+RewriteRule ^direksi index.php?sct=direksi
+
+RewriteRule ^mktr_so/([^/]*) index.php?sct=mktr_so&slug=$1
+
+RewriteRule ^struktur_group index.php?sct=struktur_group
+
+RewriteRule ^anak_perusahaan_kami index.php?sct=anak_perusahaan_kami
+
+RewriteRule ^penghargaan index.php?sct=penghargaan
+
+RewriteRule ^keanggotaan index.php?sct=keanggotaan
+
+RewriteRule ^bisnis/([^/]*)$ index.php?sct=bisnis_inti&slug=$1
+
+RewriteRule ^keberlanjutan/([^/]*)$ index.php?sct=keberlanjutan&slug=$1
+
+RewriteRule ^tatakelola_perusahaan/([^/]*)$ index.php?sct=tatakelola_perusahaan&slug=$1
+
+RewriteRule ^sdm/([^/]*)$ index.php?sct=sdm&slug=$1
+
+RewriteRule ^hubungan_investor/([^/]*)$ index.php?sct=hubungan_investor&slug=$1
+
+RewriteRule ^form_grievance index.php?sct=form_grievance
+
+RewriteRule ^news index.php?sct=berita
+
+RewriteRule ^news/([^/]*)$ index.php?sct=berita&page=$1
+
+RewriteRule ^read/([^/]*)/([^/]*)$ index.php?sct=berita_detail&id_berita=$1&slug=$2
+
+RewriteRule ^l_detail/([^/]*)/([^/]*)$ index.php?sct=lowongan_detail&id_lowongan_kerja=$1&slug=$2
+
+RewriteRule ^pencarian$ index.php?sct=pencarian
+
+RewriteRule ^cari/([^/]*)$ index.php?sct=cari&slug=$1
+
+RewriteRule ^career index.php?sct=karir
+
+RewriteRule ^kontak_kami index.php?sct=kontak_kami
+
+RewriteRule ^apply/([^/]*)/([^/]*)$ index.php?sct=karir_detail&id_lowongan_kerja=$1&slug=$2
+
+RewriteRule ^pelaporan_pelanggaran index.php?sct=pelaporan_pelanggaran
+
+#Block suspicious request methods
+RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
+
+RewriteRule ^(.*)$ - [F,L]
+
+# Block WP timthumb hack
+RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
+
+RewriteRule . - [S=1]
+
+# Block suspicious user agents and requests
+RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%28|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
+RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
+RewriteCond %{THE_REQUEST} cgi-bin [NC,OR]
+RewriteCond %{THE_REQUEST} (%0A|%0D) [NC,OR]
+
+# Block MySQL injections, RFI, base64, etc.
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC,OR]
+RewriteCond %{QUERY_STRING} \=PHP[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} [NC,OR]
+RewriteCond %{QUERY_STRING} (\.\./|\.\.) [OR]
+RewriteCond %{QUERY_STRING} ftp\: [NC,OR]
+RewriteCond %{QUERY_STRING} http\: [NC,OR]
+RewriteCond %{QUERY_STRING} https\: [NC,OR]
+RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)/self/(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)cPath=http://(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*iframe.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^i]*i)+frame.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
+RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
+RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
+RewriteCond %{QUERY_STRING} union([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
+RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
+
+Header append X-Frame-Options: "SAMEORIGIN"
+
+RewriteRule ^(.*)$ - [F,L]
+
+SetEnvIfNoCase User-Agent "^libwww-perl*" block_bad_bots
+Deny from env=block_bad_bots
+
+
+Options -Indexes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

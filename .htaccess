@@ -1,0 +1,101 @@
+RewriteEngine On
+
+# 1. Redirect HTTP ke HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Custom Error Page
+ErrorDocument 404 /index.php?sct=404
+
+# 3. Routing Rules (Merapikan URL)
+RewriteRule (.*)\.xml(.*) $1.php$2 [NC]
+RewriteRule ^profil_kami index.php?sct=profil_kami [L]
+RewriteRule ^logo_kami index.php?sct=logo_kami [L]
+RewriteRule ^visi_misi index.php?sct=visi_misi [L]
+RewriteRule ^peristiwa_penting index.php?sct=peristiwa_penting [L]
+RewriteRule ^struktur_kepemilikan index.php?sct=struktur_kepemilikan [L]
+RewriteRule ^struktur_organisasi index.php?sct=struktur_organisasi [L]
+RewriteRule ^dewan_komisaris index.php?sct=dewan_komisaris [L]
+RewriteRule ^direksi index.php?sct=direksi [L]
+RewriteRule ^mktr_so/([^/]*) index.php?sct=mktr_so&slug=$1 [L]
+RewriteRule ^struktur_group index.php?sct=struktur_group [L]
+RewriteRule ^anak_perusahaan_kami index.php?sct=anak_perusahaan_kami [L]
+RewriteRule ^penghargaan index.php?sct=penghargaan [L]
+RewriteRule ^keanggotaan index.php?sct=keanggotaan [L]
+RewriteRule ^bisnis/([^/]*)$ index.php?sct=bisnis_inti&slug=$1 [L]
+RewriteRule ^keberlanjutan/([^/]*)$ index.php?sct=keberlanjutan&slug=$1 [L]
+RewriteRule ^tatakelola_perusahaan/([^/]*)$ index.php?sct=tatakelola_perusahaan&slug=$1 [L]
+RewriteRule ^sdm/([^/]*)$ index.php?sct=sdm&slug=$1 [L]
+RewriteRule ^hubungan_investor/([^/]*)$ index.php?sct=hubungan_investor&slug=$1 [L]
+RewriteRule ^form_grievance index.php?sct=form_grievance [L]
+RewriteRule ^berita index.php?sct=berita [L]
+RewriteRule ^berita/([^/]*)$ index.php?sct=berita&page=$1 [L]
+RewriteRule ^read/([^/]*)/([^/]*)$ index.php?sct=berita_detail&id_berita=$1&slug=$2 [L]
+RewriteRule ^pencarian$ index.php?sct=pencarian [L]
+RewriteRule ^cari/([^/]*)$ index.php?sct=cari&slug=$1 [L]
+RewriteRule ^karir index.php?sct=karir [L]
+RewriteRule ^kontak_kami index.php?sct=kontak_kami [L]
+RewriteRule ^apply/([^/]*)/([^/]*)$ index.php?sct=karir_detail&id_lowongan_kerja=$1&slug=$2 [L]
+RewriteRule ^pelaporan_pelanggaran index.php?sct=pelaporan_pelanggaran [L]
+
+# 4. Security Block (Hanya memblokir yang sesuai kondisi)
+RewriteCond %{REQUEST_METHOD} ^(TRACE|DELETE|TRACK|DEBUG) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+RewriteCond %{QUERY_STRING} (concat|union|select|insert|drop|delete|update|base64_encode) [NC]
+RewriteRule ^(.*)$ - [F,L] 
+
+# 5. Security Headers & Options
+Header append X-Frame-Options: "SAMEORIGIN"
+Options -Indexes
+
+# 6. PHP Settings (cPanel Generated)
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+</IfModule>
+
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value memory_limit 2048M
+   php_value max_execution_time 130
+   php_value upload_max_filesize 400M
+   php_value post_max_size 1020M
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors On
+   php_value max_execution_time 130
+   php_value max_input_time 360
+   php_value max_input_vars 1000
+   php_value memory_limit 2048M
+   php_value post_max_size 1020M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 400M
+   php_flag zlib.output_compression Off
+   php_value error_reporting E_ERROR
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 130
+   php_value max_input_time 360
+   php_value max_input_vars 1000
+   php_value memory_limit 2048M
+   php_value post_max_size 1020M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 400M
+   php_flag zlib.output_compression Off
+   php_value error_reporting E_ERROR
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php74” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

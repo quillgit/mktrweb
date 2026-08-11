@@ -1,0 +1,124 @@
+/*================================================================================
+	CSS TAMBAHAN
+================================================================================
+
+
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+.bg-putih {
+	background: #fff
+}
+
+.bg-abu-soft {
+	background: #f8f8f8
+}
+
+.mb-03 {
+	margin-bottom: 0.3rem
+}
+
+.font-12 {
+	font-size: 12px;
+}
+
+.mb-05 {
+	margin-bottom: 0.5rem
+}
+
+.h-100p {
+	height: 100px;
+}
+
+.set-margin {
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
+
+.set-margin7m {
+    margin-left: -7px;
+    margin-right: -7px;
+}
+
+.set-padding {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.set-padding7 {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.mb-1 {
+	margin-bottom: 1rem !important
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.mb-0 {
+	margin-bottom: 0rem !important
+}
+
+.flex-right {
+	justify-content: end;
+	display: flex
+}
+
+.pd-0 {
+	padding: 0px !important
+}
+
+.pd-05 {
+	padding: 5px 0px !important;
+}
+
+.pd-01 {
+	padding: 10px 0px !important;
+}
+
+.pd-015 {
+	padding: 0px 15px;
+}
+
+.abu {
+	color: #bbc5ce !important
+}
+
+.ijo {
+	color: #28C76F !important; 
+}
+
+.w60 {
+	width: 60px !important
+}
+
+.img-rek {
+	width: 100%;
+    height: 160px;
+    object-fit: contain;
+}
+
+.btn-scan {
+	font-size: 12px;
+    padding: 5px 5px;
+    background: #7366f0;
+    color: #fff;
+    border: 1px solid #7366f0;
+    border-radius: 5px;	
+}
+
+.set-font-menu {
+	font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #000;
+    margin-left: 0.5rem;
+}
+

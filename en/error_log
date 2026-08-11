@@ -1,0 +1,270 @@
+[07-May-2025 12:32:58 UTC] PHP Warning:  include(module/karir.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 107
+[07-May-2025 12:32:58 UTC] PHP Warning:  include(module/karir.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 107
+[07-May-2025 12:32:58 UTC] PHP Warning:  include(): Failed opening 'module/karir.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 107
+[07-May-2025 12:33:01 UTC] PHP Warning:  include(module/karir.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 107
+[07-May-2025 12:33:01 UTC] PHP Warning:  include(module/karir.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 107
+[07-May-2025 12:33:01 UTC] PHP Warning:  include(): Failed opening 'module/karir.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 107
+[26-Jul-2025 16:20:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[26-Jul-2025 16:20:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[26-Jul-2025 16:20:55 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Jul-2025 15:50:29 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Jul-2025 15:50:29 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Jul-2025 15:50:29 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Aug-2025 07:26:00 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Aug-2025 07:26:00 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Aug-2025 07:26:00 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:48:03 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:48:03 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:48:03 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:49:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:49:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:49:26 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:50:50 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:50:50 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Aug-2025 05:50:50 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 06:25:09 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 06:25:09 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 06:25:09 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 12:18:01 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 12:18:01 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 12:18:01 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 21:35:11 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 21:35:11 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Aug-2025 21:35:11 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Aug-2025 02:04:12 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Aug-2025 02:04:12 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Aug-2025 02:04:12 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Aug-2025 05:11:49 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Aug-2025 05:11:49 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Aug-2025 05:11:49 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Aug-2025 19:20:49 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Aug-2025 19:20:49 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Aug-2025 19:20:49 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Aug-2025 01:17:04 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Aug-2025 01:17:04 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Aug-2025 01:17:04 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Sep-2025 03:31:11 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Sep-2025 03:31:11 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Sep-2025 03:31:11 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Sep-2025 04:50:12 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Sep-2025 04:50:12 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Sep-2025 04:50:12 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[11-Sep-2025 07:08:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[11-Sep-2025 07:08:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[11-Sep-2025 07:08:55 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Sep-2025 09:55:48 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Sep-2025 09:55:48 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Sep-2025 09:55:48 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Sep-2025 15:01:49 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Sep-2025 15:01:49 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Sep-2025 15:01:49 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Sep-2025 16:18:46 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Sep-2025 16:18:46 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Sep-2025 16:18:46 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Sep-2025 06:50:56 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Sep-2025 06:50:56 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Sep-2025 06:50:56 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Sep-2025 08:18:19 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Sep-2025 08:18:19 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Sep-2025 08:18:19 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Sep-2025 21:07:34 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Sep-2025 21:07:34 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[24-Sep-2025 21:07:34 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[30-Sep-2025 16:46:57 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[30-Sep-2025 16:46:57 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[30-Sep-2025 16:46:57 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[30-Sep-2025 19:32:38 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[30-Sep-2025 19:32:38 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[30-Sep-2025 19:32:38 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Oct-2025 16:42:45 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Oct-2025 16:42:45 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Oct-2025 16:42:45 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Oct-2025 18:10:13 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Oct-2025 18:10:13 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[06-Oct-2025 18:10:13 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Oct-2025 01:13:45 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Oct-2025 01:13:45 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Oct-2025 01:13:45 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Oct-2025 17:07:40 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Oct-2025 17:07:40 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[12-Oct-2025 17:07:40 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Oct-2025 03:07:29 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Oct-2025 03:07:29 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Oct-2025 03:07:29 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Oct-2025 06:17:15 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Oct-2025 06:17:15 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[18-Oct-2025 06:17:15 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Oct-2025 01:04:05 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Oct-2025 01:04:05 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Oct-2025 01:04:05 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Oct-2025 22:38:36 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Oct-2025 22:38:36 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Oct-2025 22:38:36 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Oct-2025 02:56:31 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Oct-2025 02:56:31 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Oct-2025 02:56:31 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Oct-2025 21:04:14 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Oct-2025 21:04:14 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Oct-2025 21:04:14 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Nov-2025 02:51:34 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Nov-2025 02:51:34 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Nov-2025 02:51:34 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Nov-2025 16:03:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Nov-2025 16:03:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Nov-2025 16:03:26 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[09-Nov-2025 03:21:59 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[09-Nov-2025 03:21:59 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[09-Nov-2025 03:21:59 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[16-Nov-2025 14:48:34 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[16-Nov-2025 14:48:34 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[16-Nov-2025 14:48:34 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Nov-2025 19:04:30 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Nov-2025 19:04:30 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[17-Nov-2025 19:04:30 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[22-Nov-2025 07:56:12 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[22-Nov-2025 07:56:12 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[22-Nov-2025 07:56:12 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Nov-2025 14:28:08 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Nov-2025 14:28:08 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[23-Nov-2025 14:28:08 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 09:06:16 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 09:06:16 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 09:06:16 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 14:51:35 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 14:51:35 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 14:51:35 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 22:16:43 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 22:16:43 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[28-Nov-2025 22:16:43 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[03-Dec-2025 19:42:24 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[03-Dec-2025 19:42:24 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[03-Dec-2025 19:42:24 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Dec-2025 21:28:20 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Dec-2025 21:28:20 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Dec-2025 21:28:20 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[10-Dec-2025 05:54:13 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[10-Dec-2025 05:54:13 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[10-Dec-2025 05:54:13 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[10-Dec-2025 13:11:27 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[10-Dec-2025 13:11:27 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[10-Dec-2025 13:11:27 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Dec-2025 18:24:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Dec-2025 18:24:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[15-Dec-2025 18:24:54 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[16-Dec-2025 01:00:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[16-Dec-2025 01:00:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[16-Dec-2025 01:00:55 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[21-Dec-2025 03:17:30 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[21-Dec-2025 03:17:30 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[21-Dec-2025 03:17:30 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[26-Dec-2025 04:32:50 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[26-Dec-2025 04:32:50 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[26-Dec-2025 04:32:50 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Dec-2025 11:31:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Dec-2025 11:31:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[29-Dec-2025 11:31:55 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Dec-2025 15:58:07 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Dec-2025 15:58:07 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[31-Dec-2025 15:58:07 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[03-Jan-2026 22:32:28 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[03-Jan-2026 22:32:28 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[03-Jan-2026 22:32:28 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Jan-2026 15:28:23 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Jan-2026 15:28:23 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[04-Jan-2026 15:28:23 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Jan-2026 07:11:15 UTC] PHP Warning:  include(module/pelaporan_pelanggaran.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Jan-2026 07:11:15 UTC] PHP Warning:  include(module/pelaporan_pelanggaran.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[05-Jan-2026 07:11:15 UTC] PHP Warning:  include(): Failed opening 'module/pelaporan_pelanggaran.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 123
+[08-Jan-2026 18:09:56 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[08-Jan-2026 18:09:56 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[08-Jan-2026 18:09:56 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[10-Jan-2026 08:28:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[10-Jan-2026 08:28:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[10-Jan-2026 08:28:54 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[18-Jan-2026 04:38:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[18-Jan-2026 04:38:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[18-Jan-2026 04:38:26 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Jan-2026 00:48:39 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Jan-2026 00:48:39 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Jan-2026 00:48:39 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Jan-2026 09:08:48 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Jan-2026 09:08:48 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Jan-2026 09:08:48 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[23-Jan-2026 10:32:04 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[23-Jan-2026 10:32:04 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[23-Jan-2026 10:32:04 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[26-Jan-2026 06:55:39 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[26-Jan-2026 06:55:39 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[26-Jan-2026 06:55:39 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[29-Jan-2026 02:08:58 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[29-Jan-2026 02:08:58 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[29-Jan-2026 02:08:58 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[01-Feb-2026 14:56:22 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[01-Feb-2026 14:56:22 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[01-Feb-2026 14:56:22 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Feb-2026 09:38:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Feb-2026 09:38:55 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Feb-2026 09:38:55 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[03-Feb-2026 02:12:20 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[03-Feb-2026 02:12:20 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[03-Feb-2026 02:12:20 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[04-Feb-2026 03:16:11 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[04-Feb-2026 03:16:11 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[04-Feb-2026 03:16:11 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[08-Feb-2026 16:19:58 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[08-Feb-2026 16:19:58 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[08-Feb-2026 16:19:58 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[11-Feb-2026 08:16:05 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[11-Feb-2026 08:16:05 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[11-Feb-2026 08:16:05 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[13-Feb-2026 20:45:43 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[13-Feb-2026 20:45:43 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[13-Feb-2026 20:45:43 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[17-Feb-2026 04:25:30 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[17-Feb-2026 04:25:30 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[17-Feb-2026 04:25:30 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[17-Feb-2026 10:03:53 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[17-Feb-2026 10:03:53 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[17-Feb-2026 10:03:53 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Feb-2026 22:29:32 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Feb-2026 22:29:32 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Feb-2026 22:29:32 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[22-Feb-2026 16:27:42 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[22-Feb-2026 16:27:42 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[22-Feb-2026 16:27:42 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[28-Feb-2026 05:50:51 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[28-Feb-2026 05:50:51 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[28-Feb-2026 05:50:51 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[28-Feb-2026 11:37:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[28-Feb-2026 11:37:54 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[28-Feb-2026 11:37:54 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[05-Mar-2026 15:30:21 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[05-Mar-2026 15:30:21 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[05-Mar-2026 15:30:21 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[06-Mar-2026 07:26:37 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[06-Mar-2026 07:26:37 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[06-Mar-2026 07:26:37 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[13-Mar-2026 09:49:29 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[13-Mar-2026 09:49:29 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[13-Mar-2026 09:49:29 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[14-Mar-2026 00:12:21 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[14-Mar-2026 00:12:21 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[14-Mar-2026 00:12:21 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Mar-2026 16:47:22 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Mar-2026 16:47:22 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Mar-2026 16:47:22 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Mar-2026 23:21:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Mar-2026 23:21:26 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[19-Mar-2026 23:21:26 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[27-Mar-2026 11:21:33 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[27-Mar-2026 11:21:33 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[27-Mar-2026 11:21:33 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[27-Mar-2026 21:06:01 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[27-Mar-2026 21:06:01 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[27-Mar-2026 21:06:01 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Apr-2026 14:01:45 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Apr-2026 14:01:45 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Apr-2026 14:01:45 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Apr-2026 14:37:44 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Apr-2026 14:37:44 UTC] PHP Warning:  include(home.php): failed to open stream: No such file or directory in /home/mktrcoid/public_html/en/configuration/function.php on line 127
+[02-Apr-2026 14:37:44 UTC] PHP Warning:  include(): Failed opening 'home.php' for inclusion (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/mktrcoid/public_html/en/configuration/function.php on line 127

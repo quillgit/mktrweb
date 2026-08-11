@@ -1,0 +1,486 @@
+<?php
+	function form(){
+
+		if 	(($_GET['mod']=='edit'))
+		{
+			$id = isset($_GET['id']) ? $_GET['id']:'';
+			$edit = mysql_fetch_array(mysql_query("SELECT * FROM tabel_struktur_organisasi WHERE id_struktur_organisasi = '$id'"));
+			$title 					= stripslashes($edit['title']);
+			$sub_title 				= stripslashes($edit['sub_title']);
+			$description 			= stripslashes($edit['description']);
+			$sub_title_english 		= stripslashes($edit['sub_title_english']);
+			$description_english 	= stripslashes($edit['description_english']);
+			$gambar 				= stripslashes($edit['gambar']);
+			$gambar_detail 			= stripslashes($edit['gambar_detail']);
+			$banner 				= stripslashes($edit['banner']);
+			$from = 'edit';
+		}
+		else
+		{ 
+			$id 					= isset($_POST['id']) ? $_POST['id']:''; 
+			$title 					= isset($_POST['title']) ? $_POST['title']:''; 
+			$sub_title 				= isset($_POST['sub_title']) ? $_POST['sub_title']:''; 
+			$description 			= isset($_POST['description']) ? $_POST['description']:''; 
+			$sub_title_english 		= isset($_POST['sub_title_english']) ? $_POST['sub_title_english']:''; 
+			$description_english 	= isset($_POST['description_english']) ? $_POST['description_english']:''; 
+			$gambar 				= isset($_POST['gambar']) ? $_POST['gambar']:'';
+			$gambar_detail 			= isset($_POST['gambar_detail']) ? $_POST['gambar_detail']:'';
+			$banner 				= isset($_POST['banner']) ? $_POST['banner']:'';
+			$from = 'process';
+		}
+	?>
+
+		<section id="multiple-column-form">
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Dewan Komisaris</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <!-- form start -->
+								<form action="?menu=<?php echo"$_GET[menu]"; ?>&mod=<?php echo"$_GET[mod]"; 
+								if ($_GET['mod']=='edit') echo "&id=$id"; ?>&act=process" method="post" enctype="multipart/form-data">
+								<?php
+								if ($_GET['mod']=='edit')
+								{
+								$id = abs((int)$_GET['id']);
+								$edit = mysql_fetch_array(mysql_query("SELECT * FROM tabel_struktur_organisasi WHERE id_struktur_organisasi = '$id'"));
+								}
+								?>
+								
+									<input type="hidden" name="id" value="<?php echo"$id"; ?>" />
+								
+                                    <div class="form-body">
+                                        <div class="row">
+										
+                                            <div class="col-md-12 col-12">
+												<h6>Nama</h6>
+                                                <div class="form-label-group">
+													<input type="text" class="form-control" name="title" value="<?php echo"$title"; ?>" placeholder="Nama ..." required="required"/>
+                                                </div>
+                                            </div>
+											
+											<div class="col-md-12 col-12">
+												<h6>Jabatan</h6>
+                                                <div class="form-label-group">
+													<input type="text" class="form-control" name="sub_title" value="<?php echo"$sub_title"; ?>" placeholder="Jabatan ..." required="required"/>
+                                                </div>
+                                            </div>
+											
+											<div class="col-md-12 col-12">
+												<h6>Description (Bahasa)</h6>
+                                                <div class="form-label-group">
+													<textarea class="form-control" rows="3" name="description" placeholder="Description ..."><?php echo"$description"; ?></textarea>
+                                                </div>
+                                            </div>
+											
+											<div class="col-md-12 col-12">
+												<hr class="english">
+											</div>
+											
+											<div class="col-md-12 col-12">
+												<h6>Jabatan (English)</h6>
+                                                <div class="form-label-group">
+													<input type="text" class="form-control" name="sub_title_english" value="<?php echo"$sub_title_english"; ?>" placeholder="Sub Title ..." required="required"/>
+                                                </div>
+                                            </div>
+											
+											<div class="col-md-12 col-12">
+												<h6>Description (English)</h6>
+                                                <div class="form-label-group">
+													<textarea class="form-control" rows="3" name="description_english" placeholder="Description ..."><?php echo"$description_english"; ?></textarea>
+                                                </div>
+                                            </div>
+											
+											<div class="col-md-12 col-12">
+												<h6>Foto</h6>
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="gambar">
+														<?php
+														if ($_GET['mod']=='edit'){
+														?>
+                                                        <label class="custom-file-label" for="inputGroupFile01"><?php echo"$gambar"; ?></label>
+														<?php
+															if (file_exists("../images/manajemen/$gambar"))
+															{
+															echo "<p><img src='../images/manajemen/$gambar' width='200' border= /></p><br>";
+															
+															}
+														
+														}else{
+														?>
+														<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+														<?php
+														}
+														?>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+											
+											<div class="col-md-12 col-12">
+												<h6>Foto Detail</h6>
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="gambar_detail">
+														<?php
+														if ($_GET['mod']=='edit'){
+														?>
+                                                        <label class="custom-file-label" for="inputGroupFile01"><?php echo"$gambar_detail"; ?></label>
+														<?php
+															if (file_exists("../images/manajemen/$gambar_detail"))
+															{
+															echo "<p><img src='../images/manajemen/$gambar_detail' width='200' border= /></p><br>";
+															
+															}
+														
+														}else{
+														?>
+														<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+														<?php
+														}
+														?>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+
+											<div class="col-md-6 col-6">
+												<h6>Banner (1905∶1273)</b></h6>
+                                                <fieldset class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="banner">
+														<?php
+														if ($_GET['mod']=='edit'){
+														?>
+                                                        <label class="custom-file-label" for="inputGroupFile01"><?php echo"$banner"; ?></label>
+														<?php
+															if (file_exists("../images/banner/$banner"))
+															{
+															echo "<p><img src='../images/banner/$banner' width='200'/></p><br>";
+															
+															}
+														
+														}else{
+														?>
+														<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+														<?php
+														}
+														?>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+											
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary mr-1 mb-1">Simpan</button>
+                                                <a href="admin.php?menu=dewan_direksi" class="btn btn-outline-warning mr-1 mb-1">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	<?php
+	}
+
+
+	if (empty($_GET['mod']))
+	{
+		
+		if (!empty($_GET['act']) ? $_GET['act'] : '' =='delete')
+		{
+			$id = isset($_GET['id']) ? $_GET['id']:'';
+			$gbr = mysql_fetch_array (mysql_query("SELECT * FROM tabel_struktur_organisasi WHERE id_struktur_organisasi = '$id'"));
+			$pic = isset($gbr['gambar']) ? $gbr['gambar']:'';
+			$delete = "DELETE FROM tabel_struktur_organisasi WHERE id_struktur_organisasi ='$id'";				 
+			$query = mysql_query($delete);
+			if ($query)
+			{
+				if (!empty($pic)) 
+				{ 
+					if (file_exists("../images/manajemen/$pic"))
+					{unlink("../images/manajemen/$pic");}
+				}
+				
+				
+				echo "<script>alert('Data Berhasil di Delete');window.location=('admin.php?menu=dewan_direksi')</script>";
+			}
+			else
+			{
+			echo "<script>alert('Data Gagal di Delete');</script>";
+			}
+		}
+		
+	?>
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Dewan Direksi</h2>
+						<div class="breadcrumb-wrapper col-12">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="admin.php?menu=home">Home</a>
+								</li>
+								<li class="breadcrumb-item"><a href="#">Tentang Kami</a>
+								</li>
+								<li class="breadcrumb-item active">Data Dewan Direksi
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<!-- Data list view starts -->
+			<section id="data-thumb-view" class="data-thumb-view-header">
+					
+				<h3 class="box-title"><a href="?menu=<?php echo "$_GET[menu]"; ?>&mod=new"><i class='feather icon-plus'></i> Tambah</a></h3>
+
+				<!-- dataTable starts -->
+				<div class="table-responsive">
+					<table class="table data-thumb-view" id="table-product">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Nama</th>
+								<th>Jabatan</th>
+								<th>Gambar</th>
+								<th>Created</th>
+								<th>Author</th>
+								<th>ACTION</th>
+							</tr>
+						</thead>
+						<tbody id="product-list">
+						
+						</tbody>
+					</table>
+				</div>
+				<!-- dataTable ends -->
+				
+			</section>
+		</div>
+		<script type="text/javascript" src="assets/js/menu/data-table-dewan-direksi.js"></script>
+		<!-- Javascript load  -->
+		
+	<?php
+	}
+	elseif ($_GET['mod']=='new')
+	{
+		if (empty($_GET['act']))
+		{
+		
+			form();
+		
+		}elseif ($_GET['act']=='process'){
+			
+			date_default_timezone_set("Asia/Bangkok");
+			$date = date('Y-m-d H:i:s');
+			
+			$lokasifile = $_FILES['gambar']['tmp_name'];
+			$namafile   = $_FILES['gambar']['name'];
+			$jenis_gambar = $_FILES['gambar']['type'];
+			
+			$lokasifile_detail = $_FILES['gambar_detail']['tmp_name'];
+			$namafile_detail   = $_FILES['gambar_detail']['name'];
+			$jenis_gambar_detail = $_FILES['gambar_detail']['type'];
+
+			$lok_mobile = $_FILES['banner']['tmp_name'];
+			$fn_mobile = $_FILES['banner']['name'];
+			$ft_mobile = $_FILES['banner']['type'];
+					
+			$title 					= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['title']));
+			$sub_title   			= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['sub_title']));
+			$description 	 		= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['description']));
+			$sub_title_english 		= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['sub_title_english']));
+			$description_english 	= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['description_english']));
+			$slug	     			= mysql_real_escape_string(slug($_POST['title']));	
+			
+			if (!empty($lokasifile)){
+				
+				if($jenis_gambar=="image/jpeg" || $jenis_gambar=="image/jpg" || $jenis_gambar=="image/png" || $jenis_gambar=="image/gif"){
+				
+					$file = str_replace(" ", "-", $namafile);
+					$prefix = rand(000,999);
+					$nama_file_baru = $prefix.''.$file;
+					move_uploaded_file($lokasifile,"../images/manajemen/$nama_file_baru");
+					
+				}
+
+			}else{
+				$nama_file_baru = "";
+			}
+			
+			if (!empty($lokasifile_detail)){
+				
+				if($jenis_gambar_detail=="image/jpeg" || $jenis_gambar_detail=="image/jpg" || $jenis_gambar_detail=="image/png" || $jenis_gambar_detail=="image/gif"){
+				
+					$file = str_replace(" ", "-", $namafile_detail);
+					$prefix = rand(000,999);
+					$nama_file_baru_detail = $prefix.''.$file;
+					move_uploaded_file($lokasifile_detail,"../images/manajemen/$nama_file_baru_detail");
+					
+				}
+
+			}else{
+				$nama_file_baru_detail = "";
+			}
+
+			if (!empty($lok_mobile)){
+				
+				if($ft_mobile=="image/jpeg" || $ft_mobile=="image/jpg" || $ft_mobile=="image/png" || $ft_mobile=="image/gif"){
+				
+					$file1 = str_replace(" ", "-", $fn_mobile);
+					$prefix1 = rand(00000,99999);
+					$fn_mobile_fin = $prefix1.''.$file1;
+					move_uploaded_file($lok_mobile,"../images/banner/$fn_mobile_fin");
+					
+				}
+
+			}else{
+				$fn_mobile_fin = "";
+			}
+		
+		
+			$add = "INSERT INTO tabel_struktur_organisasi 
+			(kategori, title, sub_title, sub_title_english, description, description_english, gambar, gambar_detail, banner, status, created, author, slug) 
+			VALUES 
+			('dewan_direksi', '$title', '$sub_title', '$sub_title_english', '$description', '$description_english', '$nama_file_baru', '$nama_file_baru_detail', '$fn_mobile_fin', '2', '$date', '$_SESSION[namauser]', '$slug')";
+						
+			$query = mysql_query($add);
+			
+			$id_article = mysql_insert_id();
+						
+			if ($query)
+			{
+				echo "<script>alert('Data Berhasil di Simpan');window.location=('admin.php?menu=dewan_direksi')</script>";
+			}
+			else
+			{
+				echo "<script>alert('Data Gagal di Simpan');</script>";
+				form();
+			}
+		}
+
+	}
+	elseif ($_GET['mod']=='edit')
+	{
+		if (empty($_GET['act']))
+		{
+			form();
+		}
+		elseif ($_GET['act']=='process')
+		{
+			date_default_timezone_set("Asia/Bangkok");
+			$date = date('Y-m-d H:i:s');
+			$lokasifile = $_FILES['gambar']['tmp_name'];
+			$namafile   = $_FILES['gambar']['name'];
+			$jenis_gambar = $_FILES['gambar']['type'];
+
+			$lokasifile_detail = $_FILES['gambar_detail']['tmp_name'];
+			$namafile_detail   = $_FILES['gambar_detail']['name'];
+			$jenis_gambar_detail = $_FILES['gambar_detail']['type'];
+
+			$lok_mobile = $_FILES['banner']['tmp_name'];
+			$fn_mobile = $_FILES['banner']['name'];
+			$ft_mobile = $_FILES['banner']['type'];
+					
+			$title 					= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['title']));
+			$sub_title   			= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['sub_title']));
+			$description 	 		= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['description']));
+			$sub_title_english 		= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['sub_title_english']));
+			$description_english 	= mysql_real_escape_string(str_replace("'", "&#39;", $_POST['description_english']));
+			$slug	     			= mysql_real_escape_string(slug($_POST['title']));	
+			
+			$update = "UPDATE tabel_struktur_organisasi SET  title = '$title',
+												sub_title = '$sub_title',
+												sub_title_english = '$sub_title_english',
+												description = '$description',
+												description_english = '$description_english',
+												slug = '$slug',
+												 updated = '$date',
+												 updater = '$_SESSION[namauser]'
+												WHERE id_struktur_organisasi = '$_POST[id]'";
+												
+												
+			$query = mysql_query($update);
+			if ($query)
+			{
+				if (!empty($lokasifile)){
+					
+					if($jenis_gambar=="image/jpeg" || $jenis_gambar=="image/jpg" || $jenis_gambar=="image/png" || $jenis_gambar=="image/gif"){
+					
+						$file = str_replace(" ", "-", $namafile);
+						$prefix = rand(000,999);
+						$nama_file_baru = $prefix.''.$file;
+						move_uploaded_file($lokasifile,"../images/manajemen/$nama_file_baru");
+						
+						$gbr = mysql_fetch_array (mysql_query("SELECT * FROM tabel_struktur_organisasi WHERE id_struktur_organisasi = '$_POST[id]'"));
+						if (!empty($gbr['gambar'])) 
+						{
+							if (file_exists("../images/manajemen/$gbr[gambar]"))
+							{unlink("../images/manajemen/$gbr[gambar]");}
+						}
+						mysql_query("UPDATE tabel_struktur_organisasi SET gambar = '$nama_file_baru' WHERE id_struktur_organisasi = '$_POST[id]'");	
+					}
+					
+				}
+				
+				if (!empty($lokasifile_detail)){
+					
+					if($jenis_gambar_detail=="image/jpeg" || $jenis_gambar_detail=="image/jpg" || $jenis_gambar_detail=="image/png" || $jenis_gambar_detail=="image/gif"){
+					
+						$file = str_replace(" ", "-", $namafile_detail);
+						$prefix = rand(000,999);
+						$nama_file_baru_detail = $prefix.''.$file;
+						move_uploaded_file($lokasifile_detail,"../images/manajemen/$nama_file_baru_detail");
+						
+						$gbr = mysql_fetch_array (mysql_query("SELECT * FROM tabel_struktur_organisasi WHERE id_struktur_organisasi = '$_POST[id]'"));
+						if (!empty($gbr['gambar_detail'])) 
+						{
+							if (file_exists("../images/manajemen/$gbr[gambar_detail]"))
+							{unlink("../images/manajemen/$gbr[gambar_detail]");}
+						}
+						mysql_query("UPDATE tabel_struktur_organisasi SET gambar_detail = '$nama_file_baru_detail' WHERE id_struktur_organisasi = '$_POST[id]'");	
+					}
+					
+				}
+
+				if (!empty($lok_mobile)){
+					
+					if($ft_mobile=="image/jpeg" || $ft_mobile=="image/jpg" || $ft_mobile=="image/png" || $ft_mobile=="image/gif"){
+					
+						$file1 = str_replace(" ", "-", $fn_mobile);
+						$prefix1 = rand(00000,99999);
+						$fn_mobile_fin = $prefix1.''.$file1;
+						move_uploaded_file($lok_mobile,"../images/banner/$fn_mobile_fin");
+						
+						$gbr = mysql_fetch_array (mysql_query("SELECT * FROM tabel_struktur_organisasi WHERE id_struktur_organisasi = '$_POST[id]'"));
+						if (!empty($gbr['banner'])) 
+						{
+							if (file_exists("../images/banner/$gbr[banner]"))
+							{unlink("../images/banner/$gbr[banner]");}
+						}
+						mysql_query("UPDATE tabel_struktur_organisasi SET banner = '$fn_mobile_fin' WHERE id_struktur_organisasi = '$_POST[id]'");	
+					}
+					
+				}
+
+				echo "<script>alert('Data Berhasil di Update');window.location=('admin.php?menu=dewan_direksi')</script>";
+				
+			}
+			else
+
+			{
+				echo "<script>alert('Data Gagal di Update');</script>";
+				form();
+			}
+		}
+	}
+	?>
+
