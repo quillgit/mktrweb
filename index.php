@@ -651,11 +651,48 @@
     	<meta name="thumbnailUrl" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>" itemprop="thumbnailUrl" />
     	
     	<meta name="robots" content="index, follow">
-        
+
+        <?php
+        }else if ($_GET['sct']=='404'){
+        ?>
+
+        <title>Halaman Tidak Ditemukan (404) - PT. Menthobi Karyatama Raya Tbk (MKTR) </title>
+        <meta name="author" content="PT. Menthobi Karyatama Raya Tbk (MKTR) ">
+        <meta name="description" content="Halaman yang Anda cari tidak tersedia atau telah dipindahkan.">
+        <meta property="og:description" content="Halaman yang Anda cari tidak tersedia atau telah dipindahkan."/>
+
+        <meta property="og:image" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta property="og:image:url"  content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+        <meta property="og:image:secure_url" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta name="thumbnailUrl" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>" itemprop="thumbnailUrl" />
+
+    	<meta name="robots" content="noindex, follow">
+
+        <?php
+        }else{
+        /* Fallback head. Without this, routes with no branch above — karir,
+           karir_detail, kontak_kami, pencarian, cari, form_grievance — rendered
+           with no <title> and no meta tags at all. */
+        ?>
+
+        <title>PT MENTHOBI KARYATAMA RAYA Tbk</title>
+
+        <meta name="author" content="PT. Menthobi Karyatama Raya Tbk (MKTR) ">
+        <meta name="description" content="PT. Menthobi Karyatama Raya Tbk ( MKTR ) merupakan perusahaan perkebunan yang berpusat di Jakarta. MKTR adalah bagian dari Maktour Group, perusahaan biro haji dan umroh terkemuka di Indonesia yang dipimpin oleh Fuad Hasan Masyhur.">
+        <meta property="og:description" content="PT. Menthobi Karyatama Raya Tbk ( MKTR ) merupakan perusahaan perkebunan yang berpusat di Jakarta. MKTR adalah bagian dari Maktour Group, perusahaan biro haji dan umroh terkemuka di Indonesia yang dipimpin oleh Fuad Hasan Masyhur."/>
+        <meta name="keywords" content="PT. Menthobi Karyatama Raya Tbk, MKTR, Maktour Group" itemprop="keywords">
+
+        <meta property="og:image" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta property="og:image:url"  content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+        <meta property="og:image:secure_url" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta name="thumbnailUrl" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>" itemprop="thumbnailUrl" />
+
+    	<meta name="robots" content="index, follow">
+
         <?php
         }
         ?>
-        
+
         <link rel="shortcut icon" href="<?php echo "$nama_folder";?>/assets/images/resources/3d MKTR.png" width="30px"
         height="30px">
 
@@ -707,7 +744,8 @@
         <!-- template styles -->
         <link rel="stylesheet" href="<?php echo "$nama_folder";?>/assets/css/style.css" />
         <link rel="stylesheet" href="<?php echo "$nama_folder";?>/assets/css/responsive.css" />
-        
+        <link rel="stylesheet" href="<?php echo "$nama_folder";?>/assets/css/theme-refresh.css" />
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 		<script src="<?php echo "$nama_folder";?>/assets/js/sweetalert.min.js"></script>

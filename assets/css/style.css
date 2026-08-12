@@ -5,17 +5,29 @@
 :root {
   --erepair-font: "Archivo", sans-serif;
   --erepair-font-2: "Titillium Web", sans-serif;
-  --erepair-font-3: "Pacifico", cursive;
+  /* FIX: was "Pacifico", cursive — Pacifico is never loaded by index.php, so this
+     fell back to the generic `cursive` family (Comic Sans MS on Windows). Its only
+     consumer is the decorative watermark at module-css/shop.css:853. Re-pointed at a
+     font that is actually loaded so it renders deterministically. */
+  --erepair-font-3: "Archivo", sans-serif;
   --erepair-gray: #6E777D;
   --erepair-gray-rgb: 110, 119, 125;
   --erepair-white: #ffffff;
   --erepair-white-rgb: 255, 255, 255;
   --erepair-base: #307c54;
-  --erepair-base-rgb: 42, 185, 126;
+  /* FIX: was 42, 185, 126 (#2AB97E) — did not match --erepair-base above, so every
+     rgba(var(--erepair-base-rgb), …) tint rendered a brighter, different green than
+     the brand solid. #307c54 is rgb(48, 124, 84). */
+  --erepair-base-rgb: 48, 124, 84;
   --erepair-black: #171717;
   --erepair-black-rgb: 23, 23, 23;
-  /*--erepair-primary: rgb(211, 123, 0);*/
-  --erepair-primary-rgb: 254, 219, 92;
+  /* FIX: --erepair-primary was commented out while var(--erepair-primary) is still
+     referenced 34× across module-css/{blog,footer,shop,slider}.css. Every one of those
+     declarations was invalid and dropped by the parser, leaving those elements with no
+     background. Restored to the value the template author had commented out, with
+     --erepair-primary-rgb brought into agreement (it had no other consumers). */
+  --erepair-primary: #D37B00;
+  --erepair-primary-rgb: 211, 123, 0;
   --erepair-extra: #F4FBF9;
   /* --erepair-extra: #FFFFFF; */
   --erepair-extra-rgb: 244, 251, 249;

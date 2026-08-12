@@ -1,0 +1,903 @@
+/*==============================================================================
+  MKTR — Theme Refresh
+  PT Menthobi Karyatama Raya Tbk
+
+  This is the project's own stylesheet. Everything else in assets/css/ is vendor
+  or purchased-template code ("erepair") and should not be edited.
+
+  HOW IT WORKS
+  ------------
+  This file is linked LAST in the <head> of index.php and en/index.php, so it
+  wins on load order without needing !important for same-specificity rules.
+
+  All 21 sheets in assets/css/module-css/ resolve their colours through the
+  --erepair-* custom properties declared in style.css. Re-declaring those
+  variables here therefore re-skins the entire site from one place, with no
+  edits to the template sheets themselves.
+
+  It styles EXISTING class names only. No markup changes, no logic changes.
+
+  CONVENTIONS
+  -----------
+  - Never hardcode a hex below the token block; use the semantic tokens.
+  - !important is used only to counter a template rule that already used it.
+    Every such case names the rule it counters.
+  - Contrast: every foreground/background pair here meets WCAG AA (4.5:1 for
+    body text, 3:1 for large text and UI borders).
+==============================================================================*/
+
+
+/*------------------------------------------------------------------------------
+  1. TOKENS
+------------------------------------------------------------------------------*/
+
+:root {
+
+  /* --- Primary ramp -------------------------------------------------------
+     Anchored on the existing brand green #307C54 at step 500 so the identity
+     is preserved; the surrounding steps give headers, hovers and tints
+     somewhere to go instead of reusing one flat value. */
+  --mktr-green-50:  #F1F8F4;
+  --mktr-green-100: #DCEDE3;
+  --mktr-green-200: #B9DBC8;
+  --mktr-green-300: #8CC2A5;
+  --mktr-green-400: #5AA47D;
+  --mktr-green-500: #307C54;   /* brand anchor — 5.07:1 on white */
+  --mktr-green-600: #266544;
+  --mktr-green-700: #1E5137;
+  --mktr-green-800: #17402B;
+  --mktr-green-900: #0F2C1E;
+
+  /* --- Secondary accent ---------------------------------------------------
+     A deep gold, used sparingly: investor CTAs, download affordances, badges,
+     active markers. Gives the palette the two-colour structure that reads
+     "listed company" rather than "stock template". */
+  --mktr-gold-50:  #FDF7EC;
+  --mktr-gold-100: #F9EACD;
+  --mktr-gold-200: #F0D190;
+  --mktr-gold-300: #E5B455;
+  --mktr-gold-400: #D89A2A;
+  --mktr-gold-500: #B87D14;
+  --mktr-gold-600: #96640F;    /* white on this = 5.09:1 */
+  --mktr-gold-700: #744C0B;    /* on white = 7.55:1 */
+
+  /* --- Neutral ramp -------------------------------------------------------
+     Very slightly green-tinted rather than pure grey, so body copy and rules
+     sit in the same family as the brand instead of fighting it. */
+  --mktr-ink-900: #101613;
+  --mktr-ink-800: #1B2420;
+  --mktr-ink-700: #2C3833;
+  --mktr-ink-600: #47554E;
+  --mktr-ink-500: #5F6E67;     /* muted text — 4.94:1 on white */
+  --mktr-ink-300: #C4CDC8;
+  --mktr-ink-200: #DDE4E0;
+  --mktr-ink-100: #EDF2EF;
+  --mktr-ink-50:  #F6F9F7;
+
+  /* --- Semantic layer ----------------------------------------------------- */
+  --mktr-surface:         #FFFFFF;
+  --mktr-surface-raised:  #FFFFFF;
+  --mktr-surface-sunken:  var(--mktr-ink-50);
+  --mktr-surface-brand:   var(--mktr-green-700);
+  --mktr-border-subtle:   var(--mktr-ink-200);
+  --mktr-border-strong:   var(--mktr-ink-300);
+  --mktr-text-primary:    var(--mktr-ink-900);
+  --mktr-text-body:       var(--mktr-ink-700);
+  --mktr-text-muted:      var(--mktr-ink-500);
+  --mktr-text-on-brand:   #FFFFFF;
+  --mktr-text-on-brand-muted: rgba(255, 255, 255, 0.78);
+
+  /* --- Geometry ----------------------------------------------------------- */
+  --mktr-radius-sm: 6px;
+  --mktr-radius-md: 10px;
+  --mktr-radius-lg: 14px;
+  --mktr-radius-xl: 20px;
+
+  /* --- Elevation ---------------------------------------------------------- */
+  --mktr-shadow-1: 0 1px 2px rgba(16, 22, 19, .05),
+                   0 1px 3px rgba(16, 22, 19, .04);
+  --mktr-shadow-2: 0 2px 4px rgba(16, 22, 19, .05),
+                   0 4px 12px rgba(16, 22, 19, .06);
+  --mktr-shadow-3: 0 4px 8px rgba(16, 22, 19, .06),
+                   0 12px 28px rgba(16, 22, 19, .09);
+  --mktr-shadow-4: 0 8px 16px rgba(16, 22, 19, .08),
+                   0 24px 48px rgba(16, 22, 19, .12);
+
+  --mktr-ease: cubic-bezier(.4, 0, .2, 1);
+
+  /* --- Re-point the template's tokens -------------------------------------
+     This is the single hinge that re-skins all 21 module-css sheets. */
+  --erepair-base:       var(--mktr-green-500);
+  --erepair-base-rgb:   48, 124, 84;
+  --erepair-primary:    var(--mktr-gold-600);
+  --erepair-primary-rgb: 150, 100, 15;
+  --erepair-black:      var(--mktr-ink-900);
+  --erepair-black-rgb:  16, 22, 19;
+  --erepair-gray:       var(--mktr-ink-500);
+  --erepair-gray-rgb:   95, 110, 103;
+  --erepair-extra:      var(--mktr-ink-50);
+  --erepair-extra-rgb:  246, 249, 247;
+  --erepair-bdr-color:  var(--mktr-ink-200);
+  --erepair-bdr-color-rgb: 221, 228, 224;
+
+  /* --- Undeclared template tokens ------------------------------------------
+     Same defect class as --erepair-primary: these four are referenced by the
+     template but never declared anywhere, so every declaration using them was
+     invalid and dropped by the parser. Declaring them here revives the rules
+     without editing the template sheets.
+
+       --erepair-border      style.css:207          .section-separator border
+       --erepair-text-dark   style.css:1643, 1682   mobile drawer link colour;
+                                                    the drawer background is
+                                                    --erepair-black, so this is
+                                                    "text ON dark", i.e. light
+       --erepair-font-two    team.css:370,
+                             about.css:576, 597     typo for --erepair-font-2
+       --erepair-bdr-radius  blog.css:434, 495      .blog-three__img radius   */
+  --erepair-border:     var(--mktr-ink-200);
+  --erepair-text-dark:  #FFFFFF;
+  --erepair-font-two:   var(--erepair-font-2);
+  --erepair-bdr-radius: var(--mktr-radius-lg);
+}
+
+
+/*------------------------------------------------------------------------------
+  2. TYPOGRAPHY
+------------------------------------------------------------------------------*/
+
+body {
+  color: var(--mktr-text-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--mktr-text-primary);
+  letter-spacing: -0.015em;
+}
+
+p { color: var(--mktr-text-body); }
+
+/* The template ships .section-title__title at a flat 48px/58px with -1.44px
+   tracking, which is oversized on laptops and cramped on phones. Fluid scale
+   keeps the same presence without the extremes. */
+.section-title__title {
+  font-size: clamp(28px, 1.35rem + 1.9vw, 46px);
+  line-height: 1.18;
+  letter-spacing: -0.022em;
+  font-weight: 700;
+}
+
+.section-title__tagline {
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  color: var(--mktr-green-600);
+}
+
+/* Give the eyebrow a small rule so it reads as a label, not stray text. */
+.section-title__tagline-box .section-title__tagline::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background-color: var(--mktr-gold-500);
+}
+
+/* Long-form copy: cap the measure so paragraphs stay readable on wide screens. */
+.shop-details-page1__text p,
+.blog-details__left > p,
+.service-details__content p {
+  max-width: 72ch;
+}
+
+
+/*------------------------------------------------------------------------------
+  3. TOP BAR + MAIN NAVIGATION
+------------------------------------------------------------------------------*/
+
+.main-menu__top {
+  background-color: var(--mktr-green-800);
+}
+
+.main-menu__top-inner {
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.main-menu__top-right > a,
+.main-menu__contact-list li a {
+  color: var(--mktr-text-on-brand-muted);
+  transition: color .25s var(--mktr-ease);
+}
+
+.main-menu__top-right > a:hover,
+.main-menu__contact-list li a:hover {
+  color: var(--mktr-text-on-brand);
+}
+
+/* Language switcher: make the current language unmistakable. */
+.language-menu .language-btn {
+  color: var(--mktr-text-on-brand-muted);
+  letter-spacing: .06em;
+  transition: color .25s var(--mktr-ease);
+}
+
+.language-menu .language-btn:hover { color: var(--mktr-text-on-brand); }
+
+.language-menu .language-btn.active {
+  color: var(--mktr-gold-300);
+  font-weight: 700;
+}
+
+.main-menu__social a {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--mktr-text-on-brand-muted);
+  background-color: rgba(255, 255, 255, .10);
+  transition: background-color .25s var(--mktr-ease),
+              color .25s var(--mktr-ease);
+}
+
+.main-menu__social a:hover {
+  color: var(--mktr-green-800);
+  background-color: var(--mktr-gold-300);
+}
+
+/* --- Menu bar --- */
+.main-menu__wrapper-inner {
+  background-color: var(--mktr-surface);
+}
+
+.main-menu__list > li > a {
+  color: var(--mktr-ink-800);
+  font-weight: 600;
+  transition: color .25s var(--mktr-ease);
+}
+
+.main-menu__list > li > a:hover,
+.main-menu__list > li.current > a {
+  color: var(--mktr-green-600);
+}
+
+/* The template already draws a hover underline via ::before (style.css:1181)
+   and the dropdown caret via ::after (style.css:1209). Recolour the existing
+   underline to the gold accent rather than adding another pseudo-element —
+   ::after is the caret and must not be touched. */
+.main-menu .main-menu__list > li > a::before,
+.stricky-header .main-menu__list > li > a::before {
+  height: 2px;
+  bottom: -5px;
+  border-radius: 2px;
+  background-color: var(--mktr-gold-500);
+}
+
+.main-menu .main-menu__list > li.dropdown > a::after {
+  color: var(--mktr-ink-500);
+  font-size: 13px;
+}
+
+.main-menu .main-menu__list > li.current > a::after,
+.main-menu .main-menu__list > li:hover > a::after {
+  color: var(--mktr-green-600);
+}
+
+/* --- Dropdowns --- */
+.main-menu__list li ul {
+  padding: 8px;
+  border: 1px solid var(--mktr-border-subtle);
+  border-radius: var(--mktr-radius-md);
+  box-shadow: var(--mktr-shadow-3);
+  background-color: var(--mktr-surface-raised);
+}
+
+.main-menu__list li ul li { border: none; }
+
+.main-menu__list li ul li a {
+  border-radius: var(--mktr-radius-sm);
+  color: var(--mktr-ink-700);
+  font-weight: 500;
+  transition: background-color .2s var(--mktr-ease),
+              color .2s var(--mktr-ease);
+}
+
+.main-menu__list li ul li a:hover {
+  background-color: var(--mktr-green-50);
+  color: var(--mktr-green-700);
+}
+
+/* Sticky state: a hairline + shadow instead of an abrupt block of colour. */
+.stricky-fixed.main-menu {
+  box-shadow: var(--mktr-shadow-2);
+  border-bottom: 1px solid var(--mktr-border-subtle);
+  backdrop-filter: saturate(1.4) blur(6px);
+}
+
+
+/*------------------------------------------------------------------------------
+  4. PAGE HEADER + BREADCRUMB
+------------------------------------------------------------------------------*/
+
+.page-header {
+  background-color: var(--mktr-green-900);
+}
+
+/* The title sits directly over a photograph with no scrim, so legibility
+   depends entirely on which image the CMS happens to serve. This adds a
+   deterministic gradient behind the text. */
+.page-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(15, 44, 30, .92) 0%,
+    rgba(15, 44, 30, .72) 42%,
+    rgba(15, 44, 30, .38) 100%
+  );
+}
+
+.page-header .container { position: relative; z-index: 1; }
+
+.page-header__inner h3 {
+  color: var(--mktr-text-on-brand);
+  font-size: clamp(28px, 1.4rem + 2.1vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, .28);
+}
+
+.thm-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.thm-breadcrumb li,
+.thm-breadcrumb li a {
+  color: var(--mktr-text-on-brand-muted);
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.thm-breadcrumb li a {
+  transition: color .25s var(--mktr-ease);
+  border-bottom: 1px solid transparent;
+}
+
+.thm-breadcrumb li a:hover {
+  color: var(--mktr-text-on-brand);
+  border-bottom-color: var(--mktr-gold-300);
+}
+
+.thm-breadcrumb li span { color: rgba(255, 255, 255, .45); }
+
+
+/*------------------------------------------------------------------------------
+  5. BUTTONS
+------------------------------------------------------------------------------*/
+
+.thm-btn {
+  border-radius: var(--mktr-radius-md);
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  gap: 10px;
+  background-color: var(--mktr-green-600);
+  color: var(--mktr-text-on-brand);
+  box-shadow: var(--mktr-shadow-1);
+  transition: background-color .25s var(--mktr-ease),
+              box-shadow .25s var(--mktr-ease),
+              transform .25s var(--mktr-ease);
+}
+
+.thm-btn:hover {
+  background-color: var(--mktr-green-700);
+  color: var(--mktr-text-on-brand);
+  box-shadow: var(--mktr-shadow-2);
+  transform: translateY(-1px);
+}
+
+.thm-btn:active { transform: translateY(0); }
+
+/* The markup carries no modifier class for a secondary button, and markup is
+   out of scope for this pass. A second .thm-btn in the same group is the
+   established pattern on this site (primary action first), so style it as the
+   quieter variant using the sibling combinator. */
+.thm-btn + .thm-btn {
+  background-color: transparent;
+  color: var(--mktr-green-700);
+  box-shadow: inset 0 0 0 1px var(--mktr-border-strong);
+}
+
+.thm-btn + .thm-btn:hover {
+  background-color: var(--mktr-green-50);
+  color: var(--mktr-green-800);
+  box-shadow: inset 0 0 0 1px var(--mktr-green-300);
+}
+
+.thm-btn span { transition: transform .25s var(--mktr-ease); }
+.thm-btn:hover span { transform: translateX(3px); }
+
+
+/*------------------------------------------------------------------------------
+  6. SIDEBAR NAVIGATION (.service-details__services-box)
+
+  The template renders each sibling-page link as a heavy uppercase bordered
+  pill. On the investor-relations pages — where these lists run to a dozen
+  items — it dominates the page. Quieter rows, one clear active state.
+------------------------------------------------------------------------------*/
+
+.service-details__services-box {
+  padding: 28px;
+  border: 1px solid var(--mktr-border-subtle);
+  border-radius: var(--mktr-radius-lg);
+  background-color: var(--mktr-surface-raised);
+  box-shadow: var(--mktr-shadow-1);
+}
+
+.service-details__services-title {
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mktr-text-muted);
+  padding-bottom: 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--mktr-border-subtle);
+}
+
+.service-details__services-list li { margin-bottom: 2px; }
+
+.service-details__services-list li a {
+  padding: 11px 14px;
+  border: none;
+  border-radius: var(--mktr-radius-sm);
+  background-color: transparent;
+  color: var(--mktr-ink-700);
+  font-family: var(--erepair-font);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0;
+  /* counters `text-transform: uppercase` on
+     module-css/service.css .service-details__services-list li a */
+  text-transform: none !important;
+  transition: background-color .2s var(--mktr-ease),
+              color .2s var(--mktr-ease);
+}
+
+/* The green fill is drawn by a ::before that scales in (service.css:824), with
+   the label flipped to white on hover/active. Retint that fill to the lightest
+   green instead of full brand green, and keep the label dark so the list reads
+   as navigation rather than a stack of buttons. */
+.service-details__services-list li a::before {
+  background-color: var(--mktr-green-50);
+  border-radius: var(--mktr-radius-sm);
+  transition: transform .25s var(--mktr-ease);
+}
+
+.service-details__services-list li:hover a,
+.service-details__services-list li.active a {
+  color: var(--mktr-green-800);
+}
+
+.service-details__services-list li:hover a span,
+.service-details__services-list li.active a span {
+  color: var(--mktr-green-600);
+}
+
+.service-details__services-list li a span {
+  color: var(--mktr-ink-300);
+  font-size: 11px;
+  transition: transform .2s var(--mktr-ease), color .2s var(--mktr-ease);
+}
+
+.service-details__services-list li a:hover span {
+  color: var(--mktr-green-500);
+  transform: translateX(2px);
+}
+
+/* Active page: a gold left marker on top of the tinted fill, so the current
+   page is unmistakable even when the list runs to a dozen items. */
+.service-details__services-list li.active a,
+.service-details__services-list li a.active {
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--mktr-gold-500);
+}
+
+
+/*------------------------------------------------------------------------------
+  7. CARDS (news / blog)
+------------------------------------------------------------------------------*/
+
+.blog-one__single {
+  height: 100%;
+  border: 1px solid var(--mktr-border-subtle);
+  border-radius: var(--mktr-radius-lg);
+  background-color: var(--mktr-surface-raised);
+  box-shadow: var(--mktr-shadow-1);
+  overflow: hidden;
+  transition: box-shadow .3s var(--mktr-ease),
+              transform .3s var(--mktr-ease),
+              border-color .3s var(--mktr-ease);
+}
+
+.blog-one__single:hover {
+  box-shadow: var(--mktr-shadow-3);
+  border-color: var(--mktr-ink-300);
+  transform: translateY(-3px);
+}
+
+.blog-one__img { border-radius: 0; }
+
+.blog-one__img img { transition: transform .5s var(--mktr-ease); }
+
+.blog-one__single:hover .blog-one__img img { transform: scale(1.04); }
+
+/* Date badge: gold marker, tighter block. */
+.blog-one__date {
+  border-radius: var(--mktr-radius-sm);
+  background-color: var(--mktr-surface-raised);
+  box-shadow: var(--mktr-shadow-2);
+  border-top: 3px solid var(--mktr-gold-500);
+}
+
+.blog-one__date p {
+  color: var(--mktr-ink-900);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.blog-one__content { padding: 22px 24px 24px; }
+
+.blog-one__title {
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+}
+
+.blog-one__title a {
+  color: var(--mktr-text-primary);
+  transition: color .25s var(--mktr-ease);
+}
+
+.blog-one__title a:hover { color: var(--mktr-green-600); }
+
+.blog-one__learn-more {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .10em;
+  color: var(--mktr-green-600);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color .25s var(--mktr-ease), gap .25s var(--mktr-ease);
+}
+
+.blog-one__learn-more:hover {
+  color: var(--mktr-green-800);
+  gap: 12px;
+}
+
+
+/*------------------------------------------------------------------------------
+  8. INVESTOR DOCUMENT ROWS
+
+  Report lists are the most-used part of an IR site and currently render as
+  bare Bootstrap .border-top/.border-bottom rows with a 20px icon. Turned into
+  proper rows with a real download affordance and a hover state.
+------------------------------------------------------------------------------*/
+
+.blog-details__left .row.border-top,
+.blog-details__left .row.border-bottom {
+  align-items: center;
+  margin-left: 0;
+  margin-right: 0;
+  border-color: var(--mktr-border-subtle) !important; /* counters Bootstrap's
+     .border-top/.border-bottom, which set border-color with !important */
+  border-radius: var(--mktr-radius-sm);
+  transition: background-color .2s var(--mktr-ease);
+}
+
+.blog-details__left .row.border-top:hover,
+.blog-details__left .row.border-bottom:hover {
+  background-color: var(--mktr-green-50);
+}
+
+.blog-details__left .row.border-top p,
+.blog-details__left .row.border-bottom p {
+  margin-bottom: 0;
+  color: var(--mktr-ink-800);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* The download link is an unstyled <img> in the markup; give it a target. */
+a.ijo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--mktr-green-200);
+  background-color: var(--mktr-green-50);
+  transition: background-color .22s var(--mktr-ease),
+              border-color .22s var(--mktr-ease),
+              box-shadow .22s var(--mktr-ease),
+              transform .22s var(--mktr-ease);
+}
+
+a.ijo:hover {
+  background-color: var(--mktr-green-100);
+  border-color: var(--mktr-green-400);
+  box-shadow: var(--mktr-shadow-2);
+  transform: translateY(-1px);
+}
+
+/* The source PNG is a small green glyph; .width-20p in the markup caps it at
+   20%, which is why it reads as a smudge. Size it off the control instead. */
+a.ijo img {
+  width: 20px !important;   /* counters .width-20p on the <img> */
+  height: auto;
+}
+
+.blog-details__title {
+  font-size: clamp(24px, 1.2rem + 1.2vw, 34px);
+  line-height: 1.25;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid var(--mktr-green-500);
+  display: inline-block;
+}
+
+
+/*------------------------------------------------------------------------------
+  9. CONTENT SURFACES
+------------------------------------------------------------------------------*/
+
+.shop-details-page1__img-inner,
+.blog-details__img {
+  border-radius: var(--mktr-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--mktr-shadow-2);
+}
+
+.shop-details-page1__title h6 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mktr-gold-700);
+}
+
+.shop-details-page1__title h2 {
+  font-size: clamp(22px, 1.1rem + 1.1vw, 32px);
+  line-height: 1.3;
+  letter-spacing: -0.018em;
+}
+
+/* Tables inside CMS content (used heavily on governance pages). */
+.shop-details-page1__text table,
+.blog-details__left table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--mktr-border-subtle);
+  border-radius: var(--mktr-radius-md);
+  overflow: hidden;
+}
+
+.shop-details-page1__text table th,
+.blog-details__left table th {
+  background-color: var(--mktr-green-50);
+  color: var(--mktr-green-800);
+  font-weight: 700;
+  font-size: 14px;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--mktr-border-subtle);
+}
+
+.shop-details-page1__text table td,
+.blog-details__left table td {
+  padding: 12px 16px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--mktr-border-subtle);
+}
+
+.shop-details-page1__text table tr:last-child td,
+.blog-details__left table tr:last-child td { border-bottom: none; }
+
+
+/*------------------------------------------------------------------------------
+  10. FOOTER
+------------------------------------------------------------------------------*/
+
+.site-footer { background-color: var(--mktr-green-800); }
+
+.footer-widget__title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mktr-gold-300);
+}
+
+.footer-widget__link li a {
+  color: var(--mktr-text-on-brand-muted);
+  font-size: 15px;
+  line-height: 1.8;
+  transition: color .22s var(--mktr-ease), padding-left .22s var(--mktr-ease);
+}
+
+.footer-widget__link li a:hover {
+  color: var(--mktr-text-on-brand);
+  padding-left: 5px;
+}
+
+/* FIX: the contact widget inherited a dark body colour and rendered as dark
+   text on the dark green footer — effectively invisible. */
+.footer-widget__contact-list li,
+.footer-widget__contact-list li p,
+.footer-widget__contact-list li a,
+.site-footer p {
+  color: var(--mktr-text-on-brand-muted);
+}
+
+.footer-widget__contact-list li a:hover { color: var(--mktr-gold-300); }
+
+.site-footer__bottom-inner,
+.site-footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, .10);
+}
+
+
+/*------------------------------------------------------------------------------
+  11. FORMS
+------------------------------------------------------------------------------*/
+
+.contact-page__input-box input[type="text"],
+.contact-page__input-box input[type="email"],
+.contact-page__input-box textarea,
+.comment-form__input-box input[type="text"],
+.comment-form__input-box input[type="email"],
+.comment-form__input-box textarea,
+.form-control {
+  border: 1px solid var(--mktr-border-subtle);
+  border-radius: var(--mktr-radius-md);
+  background-color: var(--mktr-surface);
+  color: var(--mktr-ink-800);
+  font-size: 15px;
+  transition: border-color .2s var(--mktr-ease), box-shadow .2s var(--mktr-ease);
+}
+
+.contact-page__input-box input:focus,
+.contact-page__input-box textarea:focus,
+.comment-form__input-box input:focus,
+.comment-form__input-box textarea:focus,
+.form-control:focus {
+  outline: none;
+  border-color: var(--mktr-green-400);
+  box-shadow: 0 0 0 3px rgba(48, 124, 84, .16);
+}
+
+::placeholder { color: var(--mktr-text-muted); opacity: 1; }
+
+
+/*------------------------------------------------------------------------------
+  12. ACCESSIBILITY
+------------------------------------------------------------------------------*/
+
+/* The template sets `outline: none !important` on .thm-btn, which removes the
+   only keyboard-navigation cue on the site's primary control. Restore a
+   visible ring for keyboard users without bringing back the mouse outline. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+.thm-btn:focus-visible {
+  outline: 3px solid var(--mktr-gold-400) !important;
+  outline-offset: 2px;
+  border-radius: var(--mktr-radius-sm);
+}
+
+/* Dark surfaces need a lighter ring to stay visible. */
+.main-menu__top a:focus-visible,
+.site-footer a:focus-visible,
+.page-header a:focus-visible {
+  outline-color: var(--mktr-gold-200) !important;
+}
+
+/* Skip-link support if one is ever added; harmless otherwise. */
+.sr-only:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* This template leans on WOW.js, animate.css and jarallax. Honour the OS
+   setting instead of animating regardless. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .wow { visibility: visible !important; }
+
+  .float-bob-x,
+  .float-bob-y,
+  .page-header__shape-1 { animation: none !important; }
+}
+
+
+/*------------------------------------------------------------------------------
+  13. RESPONSIVE
+  responsive.css loads before this file, so these follow it.
+------------------------------------------------------------------------------*/
+
+@media (max-width: 991px) {
+  .service-details__services-box {
+    padding: 22px;
+    margin-bottom: 36px;
+  }
+
+  .blog-one__content { padding: 18px 20px 20px; }
+
+  /* The download control lands under the title on narrow screens; left-align
+     it with the row rather than leaving it stranded in the centre. */
+  .blog-details__left .row.border-top .text-right,
+  .blog-details__left .row.border-bottom .text-right { text-align: left !important; }
+
+  .blog-details__left .row.border-top .text-center,
+  .blog-details__left .row.border-bottom .text-center { text-align: left !important; }
+}
+
+@media (max-width: 767px) {
+  body { font-size: 15px; }
+
+  .page-header::after {
+    background: linear-gradient(
+      180deg,
+      rgba(15, 44, 30, .80) 0%,
+      rgba(15, 44, 30, .88) 100%
+    );
+  }
+
+  .thm-btn {
+    padding: 13px 22px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .thm-btn + .thm-btn { margin-top: 10px; }
+
+  .service-details__services-list li a { padding: 12px 14px; }
+}
