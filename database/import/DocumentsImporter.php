@@ -31,12 +31,22 @@ class DocumentsImporter extends Importer
         'tabel_laporan_kebijakan_tatakelola'   => 'kebijakan-tata-kelola',
         'tabel_laporan_pedoman'                => 'pedoman',
         'tabel_laporan_kekayaan'               => 'laporan-kekayaan',
-        'tabel_laporan_keluhan'                => 'laporan-keluhan',
         'tabel_laporan_transaksi_afiliasi'     => 'transaksi-afiliasi',
         'tabel_laporan_setifikasi'             => 'sertifikasi',
         'tabel_laporan_rspo'                   => 'laporan-rspo',
         'tabel_laporan_plan'                   => 'rencana-kerja',
+        'tabel_laporan_ispo'                   => 'ispo',
     ];
+
+    /*
+     * tabel_laporan_keluhan is deliberately absent from the map above.
+     *
+     * Despite the name it is not a report table: its columns are name,
+     * organization, address, email, phone, communication and status_laporan,
+     * and it has no file column at all. Those are grievance submissions, and
+     * importing them here would have published complainants' contact details
+     * in a public download list. GrievancesImporter handles them instead.
+     */
 
     public function name(): string
     {

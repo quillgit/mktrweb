@@ -38,6 +38,23 @@ foreach ($users as $row) {
 
 $adminId = (int) $db->scalar('SELECT id FROM users WHERE username = ? LIMIT 1', ['admin']);
 
+/*
+ * Everything past this point is demo content, and it must never be layered on
+ * top of imported production data — the two would sit side by side and the
+ * site would show duplicate reports. Once anything carries a legacy_ref the
+ * database is considered real, and only the accounts above are seeded.
+ */
+$imported = (int) $db->scalar(
+    "SELECT (SELECT COUNT(*) FROM posts WHERE legacy_ref LIKE 'tabel_%')
+          + (SELECT COUNT(*) FROM documents WHERE legacy_ref LIKE 'tabel_%')
+          + (SELECT COUNT(*) FROM pages WHERE legacy_ref LIKE 'tabel_%')"
+);
+
+if ($imported > 0) {
+    echo "          imported data present ({$imported} rows) — demo content skipped\n";
+    return;
+}
+
 /* ---- media ------------------------------------------------------------- */
 /*
  * Point at images already in the repository so the seeded posts render with

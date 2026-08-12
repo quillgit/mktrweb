@@ -28,6 +28,27 @@ return [
     'documents.download'  => 'Unduh',
     'documents.empty'     => 'Belum ada dokumen yang dipublikasikan pada kategori ini.',
 
+    'pages.empty'         => 'Konten halaman ini belum tersedia.',
+
+    'careers.title'       => 'Karir',
+    'careers.subtitle'    => 'Peluang berkarier bersama PT Menthobi Karyatama Raya Tbk',
+    'careers.empty'       => 'Belum ada lowongan yang dibuka saat ini.',
+    'careers.closes'      => 'Ditutup',
+    'careers.open'        => 'Dibuka',
+    'careers.detail'      => 'Lihat detail',
+    'careers.back'        => 'Kembali ke Karir',
+
+    'grievance.empty'     => 'Belum ada pengaduan yang tercatat.',
+    'grievance.date'      => 'Tanggal',
+    'grievance.channel'   => 'Saluran',
+    'grievance.organization' => 'Organisasi',
+    'grievance.reporter'  => 'Pelapor',
+    'grievance.status'    => 'Status',
+    'grievance.status.reported'   => 'Laporan',
+    'grievance.status.monitoring' => 'Pemantauan',
+    'grievance.status.closed'     => 'Selesai',
+    'grievance.status.dropped'    => 'Dihentikan',
+
     'common.skip'      => 'Lewati ke konten utama',
     'common.search'    => 'Cari',
     'common.page'      => 'Halaman',

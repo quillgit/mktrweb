@@ -194,15 +194,29 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 
 .c-brand { display: flex; align-items: center; gap: 12px; }
 .c-brand img { width: 52px; height: auto; }
-.c-brand__text { font-size: 13px; font-weight: 700; color: var(--ink-800); line-height: 1.25; max-width: 190px; }
+/* Eight top-level menu items leave no room for the wordmark on wide screens,
+   where it wrapped to four lines. The logo carries the identity there, and the
+   img alt still names the company; the text returns once the nav collapses. */
+.c-brand__text {
+  display: none;
+  font-size: 13px; font-weight: 700; color: var(--ink-800);
+  line-height: 1.25; max-width: 200px;
+}
 
-.c-nav { display: flex; align-items: center; gap: 4px; }
+.c-nav { display: flex; align-items: center; gap: 1px; }
 
 .c-nav__link {
   position: relative;
-  display: inline-block;
-  padding: 10px 12px;
-  font-size: 14.5px; font-weight: 600; color: var(--ink-800);
+  /* inline-flex with line-height 1 so plain links and dropdown buttons share
+     the same box height and baseline. */
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: 9px 10px;
+  /* Eight top-level items with labels as long as "Tata Kelola Perusahaan" have
+     to sit on one line; below --nav-collapse the drawer takes over. */
+  font-size: 13.5px; font-weight: 600; color: var(--ink-800);
+  white-space: nowrap;
   border-radius: var(--radius-sm);
   transition: color .2s var(--ease), background-color .2s var(--ease);
 }
@@ -213,6 +227,43 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
   content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px;
   height: 2px; border-radius: 2px; background: var(--gold-500);
 }
+
+/* --- dropdown navigation --- */
+.c-navitem { position: relative; }
+
+.c-nav__toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 0; background: none; cursor: pointer;
+  font: 600 13.5px/1 var(--font-sans);
+  white-space: nowrap;
+}
+.c-nav__caret { font-size: 10px; opacity: .65; transition: transform .2s var(--ease); }
+.c-navitem.is-open .c-nav__caret { transform: rotate(180deg); }
+
+.c-dropdown {
+  position: absolute; top: 100%; left: 0; z-index: 60;
+  min-width: 250px; margin: 0; padding: 8px; list-style: none;
+  background: var(--surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-3);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility .18s;
+}
+.c-navitem:hover > .c-dropdown,
+.c-navitem.is-open > .c-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.c-dropdown li { position: relative; }
+.c-dropdown a {
+  display: block; padding: 9px 12px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 500; color: var(--ink-700); line-height: 1.4;
+  transition: background-color .16s var(--ease), color .16s var(--ease);
+}
+.c-dropdown a:hover { background: var(--green-50); color: var(--green-700); }
+
+.c-dropdown li.has-children > a::after {
+  content: "›"; float: right; opacity: .5; font-size: 15px; line-height: 1.2;
+}
+
+.c-dropdown--sub { top: -8px; left: 100%; }
 
 .c-navtoggle {
   display: none; align-items: center; justify-content: center;
@@ -506,6 +557,74 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 }
 
 /*------------------------------------------------------------------------------
+  10c. CONTENT PAGE LAYOUT + SECTION NAV
+
+  The legacy site hardcoded this sidebar in every sibling module. Here it is
+  one partial fed by the pages table.
+------------------------------------------------------------------------------*/
+
+.c-pagelayout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 44px; align-items: start; }
+.c-pagelayout__side { position: sticky; top: calc(var(--header-h) + 20px); }
+.c-pagelayout__main { min-width: 0; }
+
+.c-sidenav {
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+  background: var(--surface); box-shadow: var(--shadow-1); padding: 22px;
+}
+.c-sidenav__title {
+  font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-muted); padding-bottom: 12px; margin-bottom: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.c-sidenav__list, .c-sidenav__sub { list-style: none; margin: 0; padding: 0; }
+.c-sidenav__sub { margin: 2px 0 6px 12px; padding-left: 10px; border-left: 1px solid var(--border-subtle); }
+
+.c-sidenav__link {
+  display: block; padding: 9px 12px; margin-bottom: 2px;
+  border-radius: var(--radius-sm); font-size: 14.5px; font-weight: 500; line-height: 1.45;
+  color: var(--ink-700);
+  transition: background-color .18s var(--ease), color .18s var(--ease);
+}
+.c-sidenav__link:hover { background: var(--green-50); color: var(--green-700); }
+.c-sidenav__link--child { font-size: 13.5px; padding: 7px 12px; color: var(--ink-600); }
+
+.c-sidenav__link.is-active {
+  background: var(--green-50); color: var(--green-800); font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--gold-500);
+}
+
+/* --- data table (grievance register) --- */
+.c-tablewrap { overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); }
+.c-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 680px; }
+.c-table th {
+  text-align: left; font-size: 12px; letter-spacing: .09em; text-transform: uppercase;
+  font-weight: 700; color: var(--text-muted); background: var(--ink-50);
+  padding: 13px 18px; border-bottom: 1px solid var(--border-subtle);
+}
+.c-table td { padding: 14px 18px; font-size: 14.5px; border-bottom: 1px solid var(--ink-100); }
+.c-table tr:last-child td { border-bottom: 0; }
+.c-table tbody tr:hover { background: var(--green-50); }
+
+.c-case {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 99px;
+}
+.c-case::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.c-case--closed { background: var(--green-50); color: var(--green-700); }
+.c-case--monitoring { background: var(--gold-50); color: var(--gold-700); }
+.c-case--laporan { background: var(--ink-100); color: var(--ink-600); }
+.c-case--dropped { background: var(--ink-100); color: var(--ink-500); }
+
+@media (max-width: 1024px) {
+  .c-pagelayout { grid-template-columns: 240px minmax(0, 1fr); gap: 28px; }
+}
+
+@media (max-width: 1150px) {
+  .c-pagelayout { grid-template-columns: 1fr; gap: 24px; }
+  .c-pagelayout__side { position: static; }
+}
+
+/*------------------------------------------------------------------------------
   11. NOTICES
 ------------------------------------------------------------------------------*/
 
@@ -556,7 +675,7 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
   .c-footer__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1150px) {
   .c-navtoggle { display: inline-flex; }
 
   .c-nav {
@@ -567,11 +686,23 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
     box-shadow: var(--shadow-3); padding: 12px var(--gutter) 18px;
   }
   .c-nav.is-open { display: flex; }
-  .c-nav__link { padding: 12px 14px; }
+  .c-nav__link { padding: 12px 14px; text-align: left; width: 100%; }
   .c-nav__link.is-active::after { left: 14px; right: auto; width: 22px; bottom: 6px; }
 
+  /* Dropdowns become inline disclosure panels rather than overlays. */
+  .c-navitem { position: static; }
+  .c-dropdown {
+    position: static; opacity: 1; visibility: visible; transform: none;
+    box-shadow: none; border: 0; border-left: 2px solid var(--border-subtle);
+    border-radius: 0; margin: 0 0 6px 14px; padding: 0 0 0 8px;
+    display: none;
+  }
+  .c-navitem.is-open > .c-dropdown { display: block; }
+  .c-dropdown--sub { display: block; margin-left: 10px; }
+  .c-dropdown li.has-children > a::after { content: none; }
+
   .c-header__inner { position: relative; }
-  .c-brand__text { display: none; }
+  .c-brand__text { display: block; }
 }
 
 @media (max-width: 640px) {

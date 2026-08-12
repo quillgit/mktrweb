@@ -1,5 +1,12 @@
 <?php
 /**
+ * Site header.
+ *
+ * The navigation is built from the pages table — section, then parent, then
+ * child — which is what header_menu() in the legacy configuration/function.php
+ * did from the content tables. Nothing here is hardcoded except the section
+ * order, so adding a page to the CMS adds it to the menu.
+ *
  * @var \Mktr\Core\Router  $router
  * @var \Mktr\Core\Request $request
  * @var string             $locale
@@ -24,20 +31,32 @@ foreach ((array) config('app.locales', []) as $code) {
     }
 }
 
-$isNews = strpos($relative, '/berita') === 0 || strpos($relative, '/read/') === 0;
+$nav = (new \Mktr\Models\Page())->navigation(
+    $locale,
+    (string) config('app.default_locale', 'id')
+);
 
-/*
- * Only the News route exists so far; the rest of the sitemap arrives in P2.
- * Items without a route yet are rendered as plain text rather than dead links.
- */
-$navItems = [
-    ['label' => __('nav.about'),          'url' => null,                            'active' => false],
-    ['label' => __('nav.business'),       'url' => null,                            'active' => false],
-    ['label' => __('nav.sustainability'), 'url' => null,                            'active' => false],
-    ['label' => __('nav.governance'),     'url' => null,                            'active' => false],
-    ['label' => __('nav.investor'),       'url' => null,                            'active' => false],
-    ['label' => __('nav.news'),           'url' => $router->url('news.index'),      'active' => $isNews],
+/** Section => [label, url prefix, route name]. Order matches the legacy menu. */
+$sections = [
+    'about'          => [__('nav.about'),          '',                        null],
+    'business'       => [__('nav.business'),       '/bisnis',                 'pages.business'],
+    'sustainability' => [__('nav.sustainability'), '/keberlanjutan',          'pages.sustainability'],
+    'governance'     => [__('nav.governance'),     '/tatakelola_perusahaan',  'pages.governance'],
+    'investor'       => [__('nav.investor'),       '/hubungan_investor',      'pages.investor'],
+    'hr'             => [__('nav.hr'),             '/sdm',                    'pages.hr'],
 ];
+
+$urlFor = function (string $section, array $item) use ($router, $sections, $base, $locale) {
+    if ($section === 'about') {
+        $lang = $locale !== (string) config('app.default_locale', 'id') ? '/' . $locale : '';
+
+        return $base . $lang . '/' . $item['locale_slug'];
+    }
+
+    return $router->url($sections[$section][2], ['slug' => $item['locale_slug']]);
+};
+
+$isNews = strpos($relative, '/berita') === 0 || strpos($relative, '/read/') === 0;
 
 $localeUrls = [];
 foreach ((array) config('app.locales', ['id']) as $code) {
@@ -50,8 +69,7 @@ foreach ((array) config('app.locales', ['id']) as $code) {
       <?php $first = true; foreach ($localeUrls as $code => $url): ?>
         <?php if (!$first): ?><span class="c-lang__sep">|</span><?php endif; ?>
         <a class="c-lang__link<?= $code === $locale ? ' is-active' : '' ?>"
-           href="<?= e($url) ?>"
-           hreflang="<?= e($code) ?>"><?= e(config('app.locale_names.' . $code, strtoupper($code))) ?></a>
+           href="<?= e($url) ?>" hreflang="<?= e($code) ?>"><?= e(config('app.locale_names.' . $code, strtoupper($code))) ?></a>
         <?php $first = false; endforeach; ?>
     </div>
 
@@ -76,15 +94,49 @@ foreach ((array) config('app.locales', ['id']) as $code) {
     </button>
 
     <nav class="c-nav" id="primary-nav" aria-label="Navigasi utama">
-      <?php foreach ($navItems as $item): ?>
-        <?php if ($item['url'] === null): ?>
-          <span class="c-nav__link" aria-disabled="true"><?= e($item['label']) ?></span>
-        <?php else: ?>
-          <a class="c-nav__link<?= $item['active'] ? ' is-active' : '' ?>"
-             href="<?= e($item['url']) ?>"
-             <?= $item['active'] ? 'aria-current="page"' : '' ?>><?= e($item['label']) ?></a>
-        <?php endif; ?>
+      <?php foreach ($sections as $key => $meta): ?>
+        <?php
+        $items = isset($nav[$key]) ? $nav[$key] : [];
+        if ($items === []) {
+            continue;
+        }
+
+        // Group children under their parent for the dropdown.
+        $children = [];
+        foreach ($items as $item) {
+            if ($item['parent_id'] !== null) {
+                $children[(int) $item['parent_id']][] = $item;
+            }
+        }
+
+        $active = $meta[1] !== '' && strpos($relative, $meta[1]) === 0;
+        ?>
+        <div class="c-navitem">
+          <button class="c-nav__link c-nav__toggle<?= $active ? ' is-active' : '' ?>"
+                  type="button" aria-expanded="false"><?= e($meta[0]) ?>
+            <span class="c-nav__caret" aria-hidden="true">&#9662;</span>
+          </button>
+
+          <ul class="c-dropdown">
+            <?php foreach ($items as $item): ?>
+              <?php if ($item['parent_id'] !== null) { continue; } ?>
+              <li class="<?= isset($children[(int) $item['id']]) ? 'has-children' : '' ?>">
+                <a href="<?= e($urlFor($key, $item)) ?>"><?= e($item['title']) ?></a>
+                <?php if (isset($children[(int) $item['id']])): ?>
+                  <ul class="c-dropdown c-dropdown--sub">
+                    <?php foreach ($children[(int) $item['id']] as $child): ?>
+                      <li><a href="<?= e($urlFor($key, $child)) ?>"><?= e($child['title']) ?></a></li>
+                    <?php endforeach; ?>
+                  </ul>
+                <?php endif; ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
       <?php endforeach; ?>
+
+      <a class="c-nav__link<?= $isNews ? ' is-active' : '' ?>" href="<?= e($router->url('news.index')) ?>"><?= e(__('nav.news')) ?></a>
+      <a class="c-nav__link<?= strpos($relative, '/karir') === 0 ? ' is-active' : '' ?>" href="<?= e($router->url('careers.index')) ?>"><?= e(__('nav.career')) ?></a>
     </nav>
   </div>
 </header>

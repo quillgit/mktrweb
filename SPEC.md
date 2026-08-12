@@ -307,8 +307,24 @@ It is documented here so the two are not confused.
 | Languages | `en/` fork of the whole app | locale URL prefix, one codebase |
 | Admin | `adminpanel/` | `/v2/admin` |
 
-Shipped so far: News and Investor Documents, plus the media library, authentication with roles,
-draft/scheduled/published workflow, signed previews and revision history.
+Shipped so far: Content Pages, News, Investor Documents and Careers, plus the media library,
+authentication with roles, draft/scheduled/published workflow, signed previews and revision
+history. **Production data has been imported** — 100 pages, 143 documents, 20 posts, 3 vacancies.
+
+**Content pages.** One `pages` table replaces six legacy tables
+(`about_us`, `bisnis_inti`, `berkelanjutan`, `tatakelola_perusahaan`, `tentang_kami`,
+`sumber_daya`). The legacy `kategori` (parent/child/single) + `child` pair collapses to
+`parent_id`, and the legacy `tipe` becomes `type` — `text`, `documents` or `grievances` — so a
+page decides its own presentation instead of the router branching per slug. The site navigation
+and every section sidebar are built from this table, replacing markup that was hardcoded in all
+28 module files.
+
+**Grievance register.** `tabel_laporan_keluhan` is named like a report table but holds grievance
+submissions with names, addresses, emails and phone numbers, and has no file column. It is
+imported into `grievances`, not `documents`. The public register at
+`/keberlanjutan/daftar-pengaduan` shows only what the legacy page published — date, channel,
+organisation, reporter, status — and `Grievance::publicRegister()` cannot return the contact
+fields at all.
 
 **Investor documents.** One `documents` table replaces the 19 `tabel_laporan_*` tables, and one
 admin screen replaces the 20 `adminpanel/modules/laporan_*.php` modules. `document_categories.layout`

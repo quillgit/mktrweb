@@ -25,8 +25,12 @@ require BASE_DIR . '/app/bootstrap.php';
 require __DIR__ . '/Importer.php';
 require __DIR__ . '/DocumentsImporter.php';
 require __DIR__ . '/PostsImporter.php';
+require __DIR__ . '/PagesImporter.php';
+require __DIR__ . '/JobsImporter.php';
 
 use Mktr\Import\DocumentsImporter;
+use Mktr\Import\JobsImporter;
+use Mktr\Import\PagesImporter;
 use Mktr\Import\PostsImporter;
 
 $args   = array_slice($argv, 1);
@@ -42,6 +46,8 @@ foreach ($args as $arg) {
 $available = [
     'documents' => DocumentsImporter::class,
     'posts'     => PostsImporter::class,
+    'pages'     => PagesImporter::class,
+    'jobs'      => JobsImporter::class,
 ];
 
 if ($only !== '' && !isset($available[$only])) {

@@ -28,6 +28,27 @@ return [
     'documents.download'  => 'Download',
     'documents.empty'     => 'No documents have been published in this category yet.',
 
+    'pages.empty'         => 'Content for this page is not available yet.',
+
+    'careers.title'       => 'Career',
+    'careers.subtitle'    => 'Opportunities to build a career with PT Menthobi Karyatama Raya Tbk',
+    'careers.empty'       => 'There are no open vacancies at the moment.',
+    'careers.closes'      => 'Closes',
+    'careers.open'        => 'Open',
+    'careers.detail'      => 'View detail',
+    'careers.back'        => 'Back to Career',
+
+    'grievance.empty'     => 'No grievances have been recorded yet.',
+    'grievance.date'      => 'Date',
+    'grievance.channel'   => 'Channel',
+    'grievance.organization' => 'Organisation',
+    'grievance.reporter'  => 'Reporter',
+    'grievance.status'    => 'Status',
+    'grievance.status.reported'   => 'Reported',
+    'grievance.status.monitoring' => 'Monitoring',
+    'grievance.status.closed'     => 'Closed',
+    'grievance.status.dropped'    => 'Dropped',
+
     'common.skip'      => 'Skip to main content',
     'common.search'    => 'Search',
     'common.page'      => 'Page',

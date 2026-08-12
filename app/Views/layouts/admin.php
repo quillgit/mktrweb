@@ -37,19 +37,31 @@ $isActive = function (string $needle) use ($current) {
 
     <nav class="a-side__nav" aria-label="Navigasi CMS">
       <div class="a-side__label">Konten</div>
-      <?php $inSection = $isActive('/admin/posts') || $isActive('/admin/documents') || $isActive('/admin/media'); ?>
+      <?php
+      $sections  = ['/admin/pages', '/admin/posts', '/admin/documents', '/admin/careers', '/admin/media'];
+      $inSection = false;
+      foreach ($sections as $path) {
+          if ($isActive($path)) {
+              $inSection = true;
+              break;
+          }
+      }
+      ?>
       <a class="a-side__link<?= $isActive('/admin') && !$inSection ? ' is-active' : '' ?>"
          href="<?= e($router->url('admin.dashboard')) ?>">Dasbor</a>
+      <a class="a-side__link<?= $isActive('/admin/pages') ? ' is-active' : '' ?>"
+         href="<?= e($router->url('admin.pages.index')) ?>">Halaman</a>
       <a class="a-side__link<?= $isActive('/admin/posts') ? ' is-active' : '' ?>"
          href="<?= e($router->url('admin.posts.index')) ?>">Berita &amp; Kegiatan</a>
       <a class="a-side__link<?= $isActive('/admin/documents') ? ' is-active' : '' ?>"
          href="<?= e($router->url('admin.documents.index')) ?>">Dokumen Investor</a>
+      <a class="a-side__link<?= $isActive('/admin/careers') ? ' is-active' : '' ?>"
+         href="<?= e($router->url('admin.careers.index')) ?>">Karir</a>
       <a class="a-side__link<?= $isActive('/admin/media') ? ' is-active' : '' ?>"
          href="<?= e($router->url('admin.media.index')) ?>">Pustaka Media</a>
 
       <div class="a-side__label">Segera hadir</div>
-      <a class="a-side__link" href="#" aria-disabled="true" style="opacity:.45;cursor:not-allowed">Halaman Statis</a>
-      <a class="a-side__link" href="#" aria-disabled="true" style="opacity:.45;cursor:not-allowed">Menu Navigasi</a>
+      <a class="a-side__link" href="#" aria-disabled="true" style="opacity:.45;cursor:not-allowed">Formulir &amp; Pesan</a>
       <a class="a-side__link" href="#" aria-disabled="true" style="opacity:.45;cursor:not-allowed">Pengguna</a>
     </nav>
   </aside>

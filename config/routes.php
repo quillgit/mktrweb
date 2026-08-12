@@ -22,10 +22,35 @@ return function (Router $router) {
     // Signed preview of unpublished content.
     $router->get('/preview/{token}', 'Mktr\Controllers\Front\PreviewController@show', 'preview.show');
 
-    /* ---- front: investor documents -------------------------------------- */
+    /* ---- front: content pages ------------------------------------------- */
+    /*
+     * The seven `about` pages are fixed paths in the legacy sitemap rather than
+     * a slug pattern, so they are registered individually. The controller reads
+     * the slug from the path.
+     */
+    foreach (['profil_kami', 'logo_kami', 'visi_misi', 'struktur_kepemilikan',
+              'struktur_group', 'struktur_organisasi', 'keanggotaan'] as $aboutSlug) {
+        $router->get('/' . $aboutSlug, 'Mktr\Controllers\Front\PageController@about', 'pages.' . $aboutSlug);
+    }
 
-    $router->get('/hubungan_investor/{slug}', 'Mktr\Controllers\Front\DocumentController@category', 'documents.category');
+    $router->get('/bisnis/{slug}', 'Mktr\Controllers\Front\PageController@business', 'pages.business');
+    $router->get('/keberlanjutan/{slug}', 'Mktr\Controllers\Front\PageController@sustainability', 'pages.sustainability');
+    $router->get('/tatakelola_perusahaan/{slug}', 'Mktr\Controllers\Front\PageController@governance', 'pages.governance');
+    $router->get('/sdm/{slug}', 'Mktr\Controllers\Front\PageController@hr', 'pages.hr');
+
+    /*
+     * Investor pages resolve through PageController, not straight to documents:
+     * production data shows these pages carry `tipe` = text or dokumen, so the
+     * page decides whether to render prose or a document listing.
+     */
+    $router->get('/hubungan_investor/{slug}', 'Mktr\Controllers\Front\PageController@investor', 'pages.investor');
+
+    /* ---- front: documents & careers -------------------------------------- */
+
     $router->get('/dokumen/{id}/{slug}', 'Mktr\Controllers\Front\DocumentController@download', 'documents.download');
+
+    $router->get('/karir', 'Mktr\Controllers\Front\CareerController@index', 'careers.index');
+    $router->get('/apply/{id}/{slug}', 'Mktr\Controllers\Front\CareerController@show', 'careers.show');
 
     /* ---- admin ----------------------------------------------------------- */
 
@@ -43,6 +68,20 @@ return function (Router $router) {
     $router->post('/admin/posts/{id}/delete', 'Mktr\Controllers\Admin\PostController@destroy', 'admin.posts.destroy');
     $router->get('/admin/posts/{id}/revisions', 'Mktr\Controllers\Admin\PostController@revisions', 'admin.posts.revisions');
     $router->post('/admin/posts/{id}/revisions/{revision_id}/restore', 'Mktr\Controllers\Admin\PostController@restore', 'admin.posts.restore');
+
+    $router->get('/admin/pages', 'Mktr\Controllers\Admin\PageController@index', 'admin.pages.index');
+    $router->get('/admin/pages/create', 'Mktr\Controllers\Admin\PageController@create', 'admin.pages.create');
+    $router->post('/admin/pages', 'Mktr\Controllers\Admin\PageController@store', 'admin.pages.store');
+    $router->get('/admin/pages/{id}/edit', 'Mktr\Controllers\Admin\PageController@edit', 'admin.pages.edit');
+    $router->post('/admin/pages/{id}', 'Mktr\Controllers\Admin\PageController@update', 'admin.pages.update');
+    $router->post('/admin/pages/{id}/delete', 'Mktr\Controllers\Admin\PageController@destroy', 'admin.pages.destroy');
+
+    $router->get('/admin/careers', 'Mktr\Controllers\Admin\CareerController@index', 'admin.careers.index');
+    $router->get('/admin/careers/create', 'Mktr\Controllers\Admin\CareerController@create', 'admin.careers.create');
+    $router->post('/admin/careers', 'Mktr\Controllers\Admin\CareerController@store', 'admin.careers.store');
+    $router->get('/admin/careers/{id}/edit', 'Mktr\Controllers\Admin\CareerController@edit', 'admin.careers.edit');
+    $router->post('/admin/careers/{id}', 'Mktr\Controllers\Admin\CareerController@update', 'admin.careers.update');
+    $router->post('/admin/careers/{id}/delete', 'Mktr\Controllers\Admin\CareerController@destroy', 'admin.careers.destroy');
 
     $router->get('/admin/documents', 'Mktr\Controllers\Admin\DocumentController@index', 'admin.documents.index');
     $router->get('/admin/documents/create', 'Mktr\Controllers\Admin\DocumentController@create', 'admin.documents.create');

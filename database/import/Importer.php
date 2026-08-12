@@ -222,7 +222,23 @@ abstract class Importer
         $size   = $onDisk ? (int) filesize($absolute) : 0;
         $width  = null;
         $height = null;
-        $mime   = $kind === 'document' ? 'application/pdf' : 'image/jpeg';
+
+        /*
+         * file_dokumen is not always a PDF: production holds 122 pdf, 2 jpg
+         * and 1 xlsx (ISPO certificates are scanned images). Derive the type
+         * from the extension rather than assuming, and downgrade `kind` to
+         * image when the "document" is really a picture, so the media library
+         * shows a thumbnail instead of a PDF badge.
+         */
+        $mime = $this->mimeForExtension($filename);
+
+        if ($mime === 'application/octet-stream') {
+            $mime = $kind === 'document' ? 'application/pdf' : 'image/jpeg';
+        }
+
+        if (strpos($mime, 'image/') === 0) {
+            $kind = 'image';
+        }
 
         if ($onDisk && $kind === 'image') {
             $info = @getimagesize($absolute);
@@ -238,6 +254,30 @@ abstract class Importer
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)',
             [$path, $filename, $mime, $kind, $size, $width, $height, 'legacy', date('Y-m-d H:i:s')]
         );
+    }
+
+    /**
+     * Map a filename extension to a MIME type, for files that already exist on
+     * disk and are only being registered rather than uploaded.
+     */
+    protected function mimeForExtension(string $filename): string
+    {
+        $map = [
+            'pdf'  => 'application/pdf',
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png'  => 'image/png',
+            'gif'  => 'image/gif',
+            'webp' => 'image/webp',
+            'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'xls'  => 'application/vnd.ms-excel',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'doc'  => 'application/msword',
+        ];
+
+        $extension = strtolower((string) pathinfo($filename, PATHINFO_EXTENSION));
+
+        return isset($map[$extension]) ? $map[$extension] : 'application/octet-stream';
     }
 
     /**

@@ -83,6 +83,46 @@ $siteUrl         = rtrim((string) config('app.url', ''), '/');
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
     }
+
+    // Dropdowns open on hover via CSS; this adds keyboard and touch support,
+    // which hover alone cannot provide.
+    document.querySelectorAll('.c-nav__toggle').forEach(function (button) {
+        var item = button.closest('.c-navitem');
+
+        button.addEventListener('click', function () {
+            var open = !item.classList.contains('is-open');
+
+            document.querySelectorAll('.c-navitem.is-open').forEach(function (other) {
+                if (other !== item) {
+                    other.classList.remove('is-open');
+                    var otherButton = other.querySelector('.c-nav__toggle');
+                    if (otherButton) { otherButton.setAttribute('aria-expanded', 'false'); }
+                }
+            });
+
+            item.classList.toggle('is-open', open);
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!event.target.closest('.c-navitem')) {
+            document.querySelectorAll('.c-navitem.is-open').forEach(function (item) {
+                item.classList.remove('is-open');
+                var button = item.querySelector('.c-nav__toggle');
+                if (button) { button.setAttribute('aria-expanded', 'false'); }
+            });
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Escape') { return; }
+        document.querySelectorAll('.c-navitem.is-open').forEach(function (item) {
+            item.classList.remove('is-open');
+            var button = item.querySelector('.c-nav__toggle');
+            if (button) { button.setAttribute('aria-expanded', 'false'); }
+        });
+    });
 })();
 </script>
 </body>
