@@ -1,0 +1,13 @@
+# Application code must never be reachable over HTTP.
+# The same rule is duplicated in config/, database/ and resources/.
+
+<IfModule mod_authz_core.c>
+    # Apache 2.4 / LiteSpeed
+    Require all denied
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+    # Apache 2.2 fallback
+    Order allow,deny
+    Deny from all
+</IfModule>
