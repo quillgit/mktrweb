@@ -5,7 +5,6 @@
 
 namespace Mktr\Import;
 
-use Mktr\Core\Html;
 use Mktr\Models\DocumentCategory;
 
 class PagesImporter extends Importer
@@ -198,7 +197,7 @@ class PagesImporter extends Importer
                     'title'    => $title,
                     'subtitle' => isset($row['title']) ? (string) $row['title'] : null,
                     'body'     => $bodyColumn !== null && isset($row[$bodyColumn])
-                        ? Html::sanitize((string) $row[$bodyColumn]) : null,
+                        ? $this->cleanHtml($row[$bodyColumn]) : null,
                 ],
                 'en' => [
                     'slug'     => isset($row['slug_english']) && $row['slug_english'] !== ''
@@ -209,7 +208,7 @@ class PagesImporter extends Importer
                     ]),
                     'subtitle' => isset($row['title']) ? (string) $row['title'] : null,
                     'body'     => $bodyColumnEn !== null && isset($row[$bodyColumnEn])
-                        ? Html::sanitize((string) $row[$bodyColumnEn]) : null,
+                        ? $this->cleanHtml($row[$bodyColumnEn]) : null,
                 ],
             ];
 

@@ -17,6 +17,7 @@ namespace Mktr\Import;
 
 use Mktr\Core\Config;
 use Mktr\Core\Database;
+use Mktr\Core\Html;
 use PDO;
 
 abstract class Importer
@@ -344,12 +345,62 @@ abstract class Importer
             return '';
         }
 
-        $value = str_replace("\xC3\x82\xC2\xA0", ' ', $value); // double-encoded NBSP
-        $value = str_replace("\xC2\xA0", ' ', $value);         // plain NBSP
+        $value = $this->repairEncoding($value);
+        $value = str_replace("\xC2\xA0", ' ', $value);         // non-breaking space
         $value = str_replace(["\t", "\r", "\n"], ' ', $value);
         $value = preg_replace('/ {2,}/', ' ', $value);
 
         return trim((string) $value);
+    }
+
+    /**
+     * Undo one round of UTF-8 text having been stored as if it were Latin-1.
+     *
+     * Production carries this in several columns — a banner reads
+     * "berkelanjutan â€" demi Indonesia yangÂ lebihÂ hijau", where the em dash
+     * and the non-breaking spaces were encoded twice. The legacy site renders
+     * the damage verbatim.
+     *
+     * The repair is deliberately conservative. It runs only when the string
+     * contains one of the telltale sequences, and only keeps the result when
+     * decoding produces valid UTF-8 — so ordinary accented text, which has no
+     * marker, is never touched.
+     */
+    protected function repairEncoding(string $value): string
+    {
+        if (strpos($value, "\xC3\x83") === false      // Ã
+            && strpos($value, "\xC3\xA2\xE2\x82\xAC") === false  // â€
+            && strpos($value, "\xC3\x82") === false) {           // Â
+            return $value;
+        }
+
+        /*
+         * CP1252, not Latin-1: the damage came from a Windows-1252 pipeline,
+         * so the em dash sits at 0x94 and the euro sign at 0x80 — code points
+         * Latin-1 does not have, which is why an ISO-8859-1 round trip turns
+         * them into question marks instead of repairing them.
+         */
+        $decoded = @iconv('UTF-8', 'CP1252', $value);
+
+        // A wrong guess yields false or bytes that are not valid UTF-8.
+        if ($decoded === false || $decoded === '' || !mb_check_encoding($decoded, 'UTF-8')) {
+            return $value;
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * Repair, then sanitise, a rich-text column. Every importer goes through
+     * here so the encoding fix is not applied to some tables and not others.
+     */
+    protected function cleanHtml($value): ?string
+    {
+        if ($value === null || (string) $value === '') {
+            return null;
+        }
+
+        return Html::sanitize($this->repairEncoding((string) $value));
     }
 
     /**

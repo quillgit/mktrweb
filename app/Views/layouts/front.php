@@ -125,5 +125,8 @@ $siteUrl         = rtrim((string) config('app.url', ''), '/');
     });
 })();
 </script>
+
+<?php /* Page-specific scripts, set by a template before the layout renders. */ ?>
+<?= isset($scripts) ? $scripts : '' ?>
 </body>
 </html>

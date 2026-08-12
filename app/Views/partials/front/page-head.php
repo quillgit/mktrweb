@@ -16,6 +16,8 @@ $sectionLabels = [
     'governance'     => __('nav.governance'),
     'investor'       => __('nav.investor'),
     'hr'             => __('nav.hr'),
+    'contact'        => __('nav.contact'),
+    'search'         => __('search.title'),
 ];
 
 $banner = !empty($page['banner_path'])
@@ -28,9 +30,15 @@ $banner = !empty($page['banner_path'])
   </div>
   <div class="u-container c-pagehead__inner">
     <ul class="c-breadcrumb">
-      <li><a href="<?= e($router->url('news.index')) ?>"><?= e(__('nav.home')) ?></a></li>
-      <li class="c-breadcrumb__sep" aria-hidden="true">/</li>
-      <li><?= e(isset($sectionLabels[$section]) ? $sectionLabels[$section] : $section) ?></li>
+      <li><a href="<?= e($router->url('home')) ?>"><?= e(__('nav.home')) ?></a></li>
+      <?php
+      $sectionLabel = isset($sectionLabels[$section]) ? $sectionLabels[$section] : $section;
+      /* A standalone page (contact, search) is its own section — one crumb. */
+      ?>
+      <?php if ($sectionLabel !== $page['title']): ?>
+        <li class="c-breadcrumb__sep" aria-hidden="true">/</li>
+        <li><?= e($sectionLabel) ?></li>
+      <?php endif; ?>
       <li class="c-breadcrumb__sep" aria-hidden="true">/</li>
       <li aria-current="page"><?= e($page['title']) ?></li>
     </ul>

@@ -91,6 +91,14 @@ class Inquiry extends Model
         );
     }
 
+    public function countFromIpSince(string $ip, string $since): int
+    {
+        return (int) $this->db()->scalar(
+            'SELECT COUNT(*) FROM inquiries WHERE ip = ? AND created_at >= ?',
+            [$ip, $since]
+        );
+    }
+
     public function markRead(int $id): void
     {
         $this->db()->affected("UPDATE inquiries SET status = 'read' WHERE id = ? AND status = 'new'", [$id]);

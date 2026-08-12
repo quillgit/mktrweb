@@ -13,7 +13,19 @@ use Mktr\Core\Router;
 
 return function (Router $router) {
 
-    /* ---- front: news (this pass) ---------------------------------------- */
+    /* ---- front: home & search ------------------------------------------- */
+
+    $router->get('/', 'Mktr\Controllers\Front\HomeController@index', 'home');
+
+    /*
+     * The legacy scheme, kept so a search result page still has a shareable
+     * URL: the form POSTs to /pencarian, which slugs the query and redirects
+     * to /cari/{slug}.
+     */
+    $router->post('/pencarian', 'Mktr\Controllers\Front\SearchController@submit', 'search.submit');
+    $router->get('/cari/{slug}', 'Mktr\Controllers\Front\SearchController@results', 'search.results');
+
+    /* ---- front: news ----------------------------------------------------- */
 
     $router->get('/berita', 'Mktr\Controllers\Front\NewsController@index', 'news.index');
     $router->get('/berita/{page}', 'Mktr\Controllers\Front\NewsController@index', 'news.page');
@@ -67,6 +79,20 @@ return function (Router $router) {
     $router->get('/karir', 'Mktr\Controllers\Front\CareerController@index', 'careers.index');
     $router->get('/apply/{id}/{slug}', 'Mktr\Controllers\Front\CareerController@show', 'careers.show');
 
+    /* ---- front: public forms --------------------------------------------- */
+    /*
+     * Each form GETs and POSTs to the same path, so the legacy URLs are
+     * unchanged; the POST is CSRF-checked and rate limited in FormController.
+     */
+    $router->get('/kontak_kami', 'Mktr\Controllers\Front\FormController@contact', 'forms.contact');
+    $router->post('/kontak_kami', 'Mktr\Controllers\Front\FormController@submitContact', 'forms.contact.submit');
+
+    $router->get('/form_grievance', 'Mktr\Controllers\Front\FormController@grievance', 'forms.grievance');
+    $router->post('/form_grievance', 'Mktr\Controllers\Front\FormController@submitGrievance', 'forms.grievance.submit');
+
+    $router->get('/pelaporan_pelanggaran', 'Mktr\Controllers\Front\FormController@whistleblower', 'forms.whistleblower');
+    $router->post('/pelaporan_pelanggaran', 'Mktr\Controllers\Front\FormController@submitWhistleblower', 'forms.whistleblower.submit');
+
     /* ---- admin ----------------------------------------------------------- */
 
     $router->get('/admin/login', 'Mktr\Controllers\Admin\AuthController@showLogin', 'admin.login');
@@ -112,6 +138,9 @@ return function (Router $router) {
     $router->post('/admin/documents/{id}', 'Mktr\Controllers\Admin\DocumentController@update', 'admin.documents.update');
     $router->post('/admin/documents/{id}/delete', 'Mktr\Controllers\Admin\DocumentController@destroy', 'admin.documents.destroy');
 
+    $router->get('/admin/settings', 'Mktr\Controllers\Admin\SettingController@index', 'admin.settings.index');
+    $router->post('/admin/settings', 'Mktr\Controllers\Admin\SettingController@update', 'admin.settings.update');
+
     $router->get('/admin/inquiries', 'Mktr\Controllers\Admin\InquiryController@index', 'admin.inquiries.index');
     $router->get('/admin/inquiries/{id}', 'Mktr\Controllers\Admin\InquiryController@show', 'admin.inquiries.show');
     $router->post('/admin/inquiries/{id}/delete', 'Mktr\Controllers\Admin\InquiryController@destroy', 'admin.inquiries.destroy');
@@ -123,11 +152,8 @@ return function (Router $router) {
     $router->get('/admin/media/browse', 'Mktr\Controllers\Admin\MediaController@browse', 'admin.media.browse');
 
     /*
-     * TODO (P2) — remaining legacy routes, ported once the News slice is
-     * reviewed. Patterns are recorded here so the sitemap stays visible:
-     *
-     *   /                              home
-     *   /kontak_kami /form_grievance /pelaporan_pelanggaran
-     *   /pencarian /cari/{slug}
+     * Every route in SPEC.md §4 is now registered. `/pencarian` is POST-only
+     * by design — it exists to slug a query and redirect, exactly as the
+     * legacy module did, and has no page of its own.
      */
 };

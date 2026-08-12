@@ -68,9 +68,9 @@ class PostsImporter extends Importer
 
             $existing = $this->db->selectOne('SELECT id FROM posts WHERE legacy_ref = ? LIMIT 1', [$ref]);
 
-            $body   = isset($row['content']) ? \Mktr\Core\Html::sanitize((string) $row['content']) : '';
+            $body   = (string) $this->cleanHtml(isset($row['content']) ? $row['content'] : null);
             $bodyEn = $contentEn !== null && isset($row[$contentEn])
-                ? \Mktr\Core\Html::sanitize((string) $row[$contentEn])
+                ? (string) $this->cleanHtml($row[$contentEn])
                 : $body;
 
             if ($existing === null) {

@@ -35,6 +35,44 @@ class Grievance extends Model
     }
 
     /**
+     * Record a submission from the public form.
+     *
+     * Matches the legacy handler exactly: the row lands unpublished with
+     * case_status = 'laporan', so filing a grievance can never put anything on
+     * the public register — somebody has to move the case forward first.
+     *
+     * @param array<string,string> $fields
+     */
+    public function record(array $fields, string $ip, string $userAgent): int
+    {
+        $now = date('Y-m-d H:i:s');
+
+        return $this->insert([
+            'reported_on'   => date('Y-m-d'),
+            'reporter_name' => $fields['name'],
+            'organization'  => $fields['organization'],
+            'address'       => $fields['address'],
+            'email'         => $fields['email'],
+            'phone'         => $fields['phone'],
+            'communication' => $fields['communication'],
+            'case_status'   => 'laporan',
+            'status'        => 'draft',
+            'ip'            => $ip,
+            'user_agent'    => mb_substr($userAgent, 0, 255),
+            'submitted_at'  => $now,
+            'created_at'    => $now,
+        ]);
+    }
+
+    public function countFromIpSince(string $ip, string $since): int
+    {
+        return (int) $this->db()->scalar(
+            'SELECT COUNT(*) FROM grievances WHERE ip = ? AND created_at >= ?',
+            [$ip, $since]
+        );
+    }
+
+    /**
      * @return array<string,mixed>|null
      */
     public function findByLegacyRef(string $ref): ?array

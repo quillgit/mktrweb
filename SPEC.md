@@ -307,10 +307,13 @@ It is documented here so the two are not confused.
 | Languages | `en/` fork of the whole app | locale URL prefix, one codebase |
 | Admin | `adminpanel/` | `/v2/admin` |
 
-Shipped so far: Content Pages, News, Investor Documents, Careers and the About collections, plus
-the media library, authentication with roles, draft/scheduled/published workflow, signed previews
-and revision history. **Production data has been imported** — 100 pages, 143 documents, 20 posts,
-3 vacancies, 34 collection items and 3 submissions.
+**The rebuild is now feature-complete against this sitemap**: every URL in §4 resolves in both
+locales (`php database/route-parity.php` checks all 66 and must exit 0). It covers the home page,
+Content Pages, News, Investor Documents, Careers, the About collections, the three public forms,
+site search and site settings, plus the media library, authentication with roles, the
+draft/scheduled/published workflow, signed previews and revision history. **Production data has
+been imported** — 100 pages, 143 documents, 20 posts, 3 vacancies, 34 collection items,
+3 submissions and the home intro block. Cutover is documented in `CUTOVER.md`.
 
 **Content pages.** One `pages` table replaces six legacy tables
 (`about_us`, `bisnis_inti`, `berkelanjutan`, `tatakelola_perusahaan`, `tentang_kami`,
@@ -355,7 +358,32 @@ and every sidebar render from that one normalised list.
 **Submissions.** The three public forms plus the legacy `msg_inbox` land in one `inquiries`
 table: the shared fields are columns and everything form-specific is JSON in `payload`, so adding
 a form needs no migration. Submissions are never rendered publicly; `/admin/inquiries` is the only
-reader.
+reader. Grievances are the exception and go to `grievances` instead, unpublished with
+`case_status = 'laporan'` exactly as the legacy handler wrote them, so filing one can never put
+anything on the public register.
+
+`/kontak_kami` had no working form at all in the legacy site — no `<form>` element, no `name`
+attributes, and "Kirim Pesan" was an `<a href="#">`. Nothing a visitor typed there was ever
+received. All three forms are now CSRF-checked, validated, honeypotted, rate limited to 5
+submissions per IP per hour across all three, and written through prepared statements.
+
+**Home page.** `module/home.php` selected four of its panels by hardcoded primary key
+(`id_berkelanjutan = '43'`, `!= '1'`, `= '35'`), so deleting a page in the CMS silently emptied a
+panel and reordering them shuffled it. The rebuilt page takes the section's own published order.
+The hero replaces Owl Carousel (jQuery plus two stylesheets) with ~40 lines of vanilla JS that
+honours `prefers-reduced-motion`.
+
+**Search.** The legacy `/cari/{slug}` searched two tables with `LIKE '%$search%'` interpolated
+into the SQL and returned two unlabelled lists. The URL scheme is kept — the form POSTs to
+`/pencarian`, which slugs the query and redirects to `/cari/{slug}`, so a result page is
+shareable — but it now covers pages, news, documents and vacancies, binds the term, and labels
+each hit with what it is.
+
+**Site settings.** The office address, the corporate email and the social links were typed into
+all 28 modules, so changing an address meant a code deploy. They are rows in `site_settings` now,
+along with the home intro block that used to be the one-row `tabel_home`. `value` holds anything
+identical across locales; translated text lives in `site_setting_translations`. A missing setting
+falls back to the template's own default, so an empty table never breaks a page.
 
 **Assets are not under `base_path`.** `asset()` resolves against `app.asset_base` (empty), not
 `app.base_path` (`/v2`). `assets/`, `images/` and `dokumen/` sit at the document root and are

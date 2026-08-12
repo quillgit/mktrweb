@@ -28,12 +28,14 @@ require __DIR__ . '/PostsImporter.php';
 require __DIR__ . '/PagesImporter.php';
 require __DIR__ . '/JobsImporter.php';
 require __DIR__ . '/CollectionsImporter.php';
+require __DIR__ . '/SettingsImporter.php';
 
 use Mktr\Import\CollectionsImporter;
 use Mktr\Import\DocumentsImporter;
 use Mktr\Import\JobsImporter;
 use Mktr\Import\PagesImporter;
 use Mktr\Import\PostsImporter;
+use Mktr\Import\SettingsImporter;
 
 $args   = array_slice($argv, 1);
 $dryRun = in_array('--dry-run', $args, true);
@@ -51,6 +53,7 @@ $available = [
     'pages'     => PagesImporter::class,
     'jobs'      => JobsImporter::class,
     'collections' => CollectionsImporter::class,
+    'settings'    => SettingsImporter::class,
 ];
 
 if ($only !== '' && !isset($available[$only])) {

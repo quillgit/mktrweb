@@ -39,7 +39,7 @@ $isActive = function (string $needle) use ($current) {
       <div class="a-side__label">Konten</div>
       <?php
       $sections  = ['/admin/pages', '/admin/posts', '/admin/documents', '/admin/careers',
-                    '/admin/collections', '/admin/inquiries', '/admin/media'];
+                    '/admin/collections', '/admin/inquiries', '/admin/media', '/admin/settings'];
       $inSection = false;
       foreach ($sections as $path) {
           if ($isActive($path)) {
@@ -67,6 +67,10 @@ $isActive = function (string $needle) use ($current) {
       <a class="a-side__link<?= $isActive('/admin/inquiries') ? ' is-active' : '' ?>"
          href="<?= e($router->url('admin.inquiries.index')) ?>">Formulir &amp; Pesan</a>
 
+      <div class="a-side__label">Situs</div>
+      <a class="a-side__link<?= $isActive('/admin/settings') ? ' is-active' : '' ?>"
+         href="<?= e($router->url('admin.settings.index')) ?>">Pengaturan Situs</a>
+
       <div class="a-side__label">Segera hadir</div>
       <a class="a-side__link" href="#" aria-disabled="true" style="opacity:.45;cursor:not-allowed">Pengguna</a>
     </nav>
@@ -76,7 +80,7 @@ $isActive = function (string $needle) use ($current) {
     <header class="a-top">
       <h1 class="a-top__title"><?= e(isset($heading) ? $heading : 'CMS') ?></h1>
       <div class="a-top__user">
-        <a href="<?= e($router->url('news.index')) ?>" target="_blank" rel="noopener">Lihat situs &nearr;</a>
+        <a href="<?= e($router->url('home')) ?>" target="_blank" rel="noopener">Lihat situs &nearr;</a>
         <span><?= e(isset($authUser['name']) ? $authUser['name'] : '') ?></span>
         <span class="a-badge-role"><?= e(isset($authUser['role_name']) ? $authUser['role_name'] : '') ?></span>
         <form method="post" action="<?= e($router->url('admin.logout')) ?>" class="u-inline">

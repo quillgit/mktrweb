@@ -69,7 +69,7 @@ $isNews = strpos($relative, '/berita') === 0 || strpos($relative, '/read/') === 
 
 $localeUrls = [];
 foreach ((array) config('app.locales', ['id']) as $code) {
-    $localeUrls[$code] = $router->url('news.index', [], $code);
+    $localeUrls[$code] = $router->url('home', [], $code);
 }
 ?>
 <div class="c-topbar">
@@ -82,6 +82,8 @@ foreach ((array) config('app.locales', ['id']) as $code) {
         <?php $first = false; endforeach; ?>
     </div>
 
+    <a class="c-topbar__contact" href="<?= e($router->url('forms.contact')) ?>"><?= e(__('nav.contact')) ?></a>
+
     <div class="c-social" aria-label="Media sosial">
       <a href="https://m.facebook.com/p/PT-Menthobi-Karyatama-Raya-Tbk-100081064625604" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
       <a href="https://instagram.com/mktr.id" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
@@ -93,7 +95,7 @@ foreach ((array) config('app.locales', ['id']) as $code) {
 
 <header class="c-header">
   <div class="u-container c-header__inner">
-    <a class="c-brand" href="<?= e($router->url('news.index')) ?>">
+    <a class="c-brand" href="<?= e($router->url('home')) ?>">
       <img src="<?= e(asset('assets/images/resources/3d MKTR.png')) ?>" alt="<?= e(__('site.name')) ?>" width="52" height="52">
       <span class="c-brand__text"><?= e(__('site.name')) ?></span>
     </a>
@@ -147,6 +149,14 @@ foreach ((array) config('app.locales', ['id']) as $code) {
 
       <a class="c-nav__link<?= $isNews ? ' is-active' : '' ?>" href="<?= e($router->url('news.index')) ?>"><?= e(__('nav.news')) ?></a>
       <a class="c-nav__link<?= strpos($relative, '/karir') === 0 ? ' is-active' : '' ?>" href="<?= e($router->url('careers.index')) ?>"><?= e(__('nav.career')) ?></a>
+
+      <form class="c-navsearch" method="post" action="<?= e($router->url('search.submit')) ?>" role="search">
+        <?= csrf_field() ?>
+        <label class="u-visually-hidden" for="nav-q"><?= e(__('common.search')) ?></label>
+        <input class="c-navsearch__input" type="search" id="nav-q" name="q"
+               placeholder="<?= e(__('common.search')) ?>&hellip;">
+        <button class="c-navsearch__btn" type="submit" aria-label="<?= e(__('common.search')) ?>">&#9906;</button>
+      </form>
     </nav>
   </div>
 </header>

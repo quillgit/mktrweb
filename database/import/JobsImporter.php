@@ -10,7 +10,6 @@
 
 namespace Mktr\Import;
 
-use Mktr\Core\Html;
 use Mktr\Models\Job;
 
 class JobsImporter extends Importer
@@ -117,9 +116,9 @@ class JobsImporter extends Importer
                 $this->count(self::JOBS, 'updated');
             }
 
-            $body   = isset($row['content']) ? Html::sanitize((string) $row['content']) : null;
+            $body   = $this->cleanHtml(isset($row['content']) ? $row['content'] : null);
             $bodyEn = isset($row['content_english']) && trim((string) $row['content_english']) !== ''
-                ? Html::sanitize((string) $row['content_english'])
+                ? $this->cleanHtml($row['content_english'])
                 : $body;
 
             $translations = [

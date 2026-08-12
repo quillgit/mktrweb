@@ -6,8 +6,6 @@
 
 namespace Mktr\Import;
 
-use Mktr\Core\Html;
-
 class CollectionsImporter extends Importer
 {
     /**
@@ -164,13 +162,13 @@ class CollectionsImporter extends Importer
                     'title'    => $title,
                     'subtitle' => $subtitle === '' ? null : $subtitle,
                     'body'     => $bodyCol !== null && isset($row[$bodyCol])
-                        ? Html::sanitize((string) $row[$bodyCol]) : null,
+                        ? $this->cleanHtml($row[$bodyCol]) : null,
                 ],
                 'en' => [
                     'title'    => $titleEn,
                     'subtitle' => $subtitleEn === '' ? null : $subtitleEn,
                     'body'     => $bodyColEn !== null && isset($row[$bodyColEn])
-                        ? Html::sanitize((string) $row[$bodyColEn]) : null,
+                        ? $this->cleanHtml($row[$bodyColEn]) : null,
                 ],
             ];
 
@@ -267,6 +265,17 @@ class CollectionsImporter extends Importer
                 return $value !== null && $value !== '';
             });
 
+            /*
+             * The checkbox categories live in their own join table. Without
+             * them a report loses what kind of conduct was alleged, which is
+             * the first thing anyone triaging it needs.
+             */
+            $categories = $this->reportCategories($sourceId);
+
+            if ($categories !== []) {
+                $payload['categories'] = $categories;
+            }
+
             $this->upsertInquiry($table . ':' . $sourceId, [
                 'kind'       => 'whistleblower',
                 'name'       => isset($row['nama_pelapor']) ? (string) $row['nama_pelapor'] : null,
@@ -279,6 +288,35 @@ class CollectionsImporter extends Importer
                 'created_at' => $this->normaliseDate(isset($row['created']) ? $row['created'] : null) ?: date('Y-m-d H:i:s'),
             ], $table);
         }
+    }
+
+    /**
+     * The conduct categories a whistleblower report was filed under.
+     *
+     * @return string[]
+     */
+    private function reportCategories(int $reportId): array
+    {
+        if (!$this->tableExists('trs_pelaporan_pelanggaran_tindakan')) {
+            return [];
+        }
+
+        $rows = $this->fetchAll(
+            'SELECT tindakan FROM trs_pelaporan_pelanggaran_tindakan
+              WHERE id_pelaporan_pelanggaran = ? ORDER BY id',
+            [$reportId]
+        );
+
+        $categories = [];
+        foreach ($rows as $row) {
+            $value = $this->cleanText(isset($row['tindakan']) ? (string) $row['tindakan'] : null);
+
+            if ($value !== '') {
+                $categories[] = $value;
+            }
+        }
+
+        return $categories;
     }
 
     /**

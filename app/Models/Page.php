@@ -80,6 +80,36 @@ class Page extends Model
     }
 
     /**
+     * Top-level pages of a section with the bits a card needs — subtitle and
+     * cover image — for the home page.
+     *
+     * module/home.php selected these by hardcoded primary key
+     * (`id_berkelanjutan = '43'`), so deleting a page in the CMS emptied a
+     * panel on the front page. Here it is simply the section's own order.
+     *
+     * @return array<int,array<string,mixed>>
+     */
+    public function featured(string $section, string $locale, string $fallback, int $limit): array
+    {
+        return $this->db()->select(
+            'SELECT p.id, p.section, p.slug,
+                    COALESCE(t.title, f.title)       AS title,
+                    COALESCE(t.subtitle, f.subtitle) AS subtitle,
+                    COALESCE(t.body, f.body)         AS body,
+                    COALESCE(t.slug, p.slug)         AS locale_slug,
+                    c.path AS cover_path, c.alt AS cover_alt
+               FROM pages p
+          LEFT JOIN page_translations t ON t.page_id = p.id AND t.locale = ?
+          LEFT JOIN page_translations f ON f.page_id = p.id AND f.locale = ?
+          LEFT JOIN media c ON c.id = p.cover_media_id
+              WHERE p.section = ? AND p.parent_id IS NULL AND ' . $this->publishedClause() . '
+           ORDER BY p.sort, p.id
+              LIMIT ?',
+            [$locale, $fallback, $section, $limit]
+        );
+    }
+
+    /**
      * Whole-site navigation: every published page, grouped by section, for the
      * header menu. Replaces the DB-driven header_menu() of the legacy site.
      *

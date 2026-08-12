@@ -21,7 +21,7 @@ $categoryUrl = $router->url('documents.category', ['slug' => $category['slug']])
   </div>
   <div class="u-container c-pagehead__inner">
     <ul class="c-breadcrumb">
-      <li><a href="<?= e($router->url('news.index')) ?>"><?= e(__('nav.home')) ?></a></li>
+      <li><a href="<?= e($router->url('home')) ?>"><?= e(__('nav.home')) ?></a></li>
       <li class="c-breadcrumb__sep" aria-hidden="true">/</li>
       <li><?= e(__('nav.investor')) ?></li>
       <li class="c-breadcrumb__sep" aria-hidden="true">/</li>
