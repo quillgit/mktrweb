@@ -124,7 +124,7 @@
 			
 		}else{
 		
-			include "home.php";
+			include "module/home.php";
 			
 		}
 

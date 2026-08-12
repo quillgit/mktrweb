@@ -1,0 +1,20 @@
+# Local environment — never commit credentials.
+.env
+.env.*
+!.env.example
+
+# Runtime artefacts.
+/storage/logs/*
+!/storage/logs/.htaccess
+/storage/cache/*
+!/storage/cache/.htaccess
+/storage/uploads/*
+!/storage/uploads/.htaccess
+
+# Editor / OS noise.
+.DS_Store
+Thumbs.db
+*.swp
+
+# Legacy error logs already present in the working tree.
+error_log

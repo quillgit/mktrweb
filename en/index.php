@@ -633,11 +633,48 @@
         <meta property="og:image:secure_url" content="<?php echo "$nama_folder/images/post/$artikel_detail_seo[gambar]"; ?>"/>
     	<meta name="thumbnailUrl" content="<?php echo "$nama_folder/images/post/$artikel_detail_seo[gambar]"; ?>" itemprop="thumbnailUrl" />
     	<meta name="robots" content="index, follow">
-        
+
+        <?php
+        }else if ($_GET['sct']=='404'){
+        ?>
+
+        <title>Page Not Found (404) - PT. Menthobi Karyatama Raya Tbk (MKTR) </title>
+        <meta name="author" content="PT. Menthobi Karyatama Raya Tbk (MKTR) ">
+        <meta name="description" content="The page you are looking for is unavailable or has been moved.">
+        <meta property="og:description" content="The page you are looking for is unavailable or has been moved."/>
+
+        <meta property="og:image" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta property="og:image:url"  content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+        <meta property="og:image:secure_url" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta name="thumbnailUrl" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>" itemprop="thumbnailUrl" />
+
+    	<meta name="robots" content="noindex, follow">
+
+        <?php
+        }else{
+        /* Fallback head. Without this, routes with no branch above — karir,
+           karir_detail, kontak_kami, pencarian, cari, form_grievance — rendered
+           with no <title> and no meta tags at all. */
+        ?>
+
+        <title>PT MENTHOBI KARYATAMA RAYA Tbk</title>
+
+        <meta name="author" content="PT. Menthobi Karyatama Raya Tbk (MKTR) ">
+        <meta name="description" content="PT. Menthobi Karyatama Raya Tbk ( MKTR ) is a plantation company headquartered in Jakarta. MKTR is part of Maktour Group, a leading hajj and umrah travel company in Indonesia led by Fuad Hasan Masyhur.">
+        <meta property="og:description" content="PT. Menthobi Karyatama Raya Tbk ( MKTR ) is a plantation company headquartered in Jakarta. MKTR is part of Maktour Group, a leading hajj and umrah travel company in Indonesia led by Fuad Hasan Masyhur."/>
+        <meta name="keywords" content="PT. Menthobi Karyatama Raya Tbk, MKTR, Maktour Group" itemprop="keywords">
+
+        <meta property="og:image" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta property="og:image:url"  content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+        <meta property="og:image:secure_url" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>"/>
+    	<meta name="thumbnailUrl" content="<?php echo "$nama_folder/assets/images/resources/3d MKTR.png"; ?>" itemprop="thumbnailUrl" />
+
+    	<meta name="robots" content="index, follow">
+
         <?php
         }
         ?>
-        
+
         <link rel="shortcut icon" href="<?php echo "$nama_folder";?>/assets/images/resources/3d MKTR.png" width="30px"
         height="30px">
 
@@ -688,7 +725,8 @@
         <!-- template styles -->
         <link rel="stylesheet" href="<?php echo "$nama_folder";?>/assets/css/style.css" />
         <link rel="stylesheet" href="<?php echo "$nama_folder";?>/assets/css/responsive.css" />
-        
+        <link rel="stylesheet" href="<?php echo "$nama_folder";?>/assets/css/theme-refresh.css" />
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
 		<script src="<?php echo "$nama_folder";?>/assets/js/sweetalert.min.js"></script>
