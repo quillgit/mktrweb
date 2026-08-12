@@ -404,6 +404,108 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 .c-pagination .is-gap { border: 0; background: transparent; color: var(--text-muted); min-width: 24px; }
 
 /*------------------------------------------------------------------------------
+  10b. INVESTOR DOCUMENTS
+
+  Two presentations, chosen per category by document_categories.layout:
+  a dated list, and a report-cover grid.
+------------------------------------------------------------------------------*/
+
+/* --- category tabs --- */
+.c-doctabs {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 28px; padding-bottom: 12px;
+}
+.c-doctab {
+  padding: 9px 16px; border-radius: 99px;
+  font-size: 13.5px; font-weight: 600; color: var(--ink-600); background: var(--ink-50);
+  transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.c-doctab:hover { background: var(--green-100); color: var(--green-700); }
+.c-doctab.is-active { background: var(--green-600); color: #fff; }
+
+/* --- year filter --- */
+.c-years { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 24px; }
+.c-years__label {
+  font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); margin-right: 6px;
+}
+.c-year {
+  min-width: 62px; padding: 7px 13px; text-align: center;
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  font-size: 13.5px; font-weight: 600; color: var(--ink-700); background: var(--surface);
+  transition: border-color .2s var(--ease), background-color .2s var(--ease), color .2s var(--ease);
+}
+.c-year:hover { border-color: var(--green-300); background: var(--green-50); color: var(--green-700); }
+.c-year.is-active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
+
+/* --- dated list --- */
+.c-doclist { border-top: 1px solid var(--border-subtle); }
+
+.c-doc-row {
+  display: flex; align-items: center; gap: 20px;
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: background-color .2s var(--ease);
+}
+.c-doc-row:hover { background: var(--green-50); }
+
+.c-doc-row__date {
+  flex: 0 0 auto; min-width: 104px;
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.c-doc-row__body { flex: 1 1 auto; min-width: 0; }
+.c-doc-row__title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin: 0 0 2px; line-height: 1.45; }
+.c-doc-row__meta { font-size: 13px; color: var(--text-muted); }
+
+.c-doc-dl {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; border-radius: var(--radius-md);
+  border: 1px solid var(--green-200); background: var(--green-50);
+  font-size: 13px; font-weight: 700; color: var(--green-700);
+  transition: background-color .2s var(--ease), border-color .2s var(--ease),
+              box-shadow .2s var(--ease), transform .2s var(--ease);
+}
+.c-doc-dl:hover {
+  background: var(--green-100); border-color: var(--green-400); color: var(--green-800);
+  box-shadow: var(--shadow-2); transform: translateY(-1px);
+}
+
+/* --- cover grid --- */
+.c-doc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+
+.c-doc-card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-1); overflow: hidden;
+  transition: box-shadow .3s var(--ease), transform .3s var(--ease), border-color .3s var(--ease);
+}
+.c-doc-card:hover { box-shadow: var(--shadow-3); border-color: var(--ink-300); transform: translateY(-3px); }
+
+/* Report covers are portrait; A4-ish keeps them from being cropped oddly. */
+.c-doc-card__cover { aspect-ratio: 3 / 4; background: var(--ink-100); overflow: hidden; }
+.c-doc-card__cover img { width: 100%; height: 100%; object-fit: cover; }
+
+.c-doc-card__body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.c-doc-card__title { font-size: 16px; line-height: 1.42; margin-bottom: 8px; color: var(--text-primary); }
+.c-doc-card__meta { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.c-doc-card__body .c-doc-dl { margin-top: auto; justify-content: center; }
+
+@media (max-width: 1024px) { .c-doc-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { .c-doc-grid { grid-template-columns: repeat(2, 1fr); } }
+
+@media (max-width: 640px) {
+  .c-doc-row { flex-wrap: wrap; gap: 10px; padding: 16px 12px; }
+  .c-doc-row__date { min-width: 0; order: 1; }
+  .c-doc-row__body { order: 3; flex-basis: 100%; }
+  .c-doc-dl { order: 2; margin-left: auto; }
+  .c-doc-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+
+/*------------------------------------------------------------------------------
   11. NOTICES
 ------------------------------------------------------------------------------*/
 

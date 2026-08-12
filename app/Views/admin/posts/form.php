@@ -56,7 +56,7 @@ if ($coverPath === '' && $coverId > 0) {
 ?>
 <form method="post" action="<?= e($action) ?>" id="post-form">
   <?= csrf_field() ?>
-  <input type="hidden" name="cover_media_id" id="cover_media_id" value="<?= $coverId ?>">
+  <input type="hidden" name="cover_media_id" id="cover_media_id" value="<?= $coverId ?>" data-preview="cover-preview">
 
   <div class="a-grid a-grid--sidebar">
 
@@ -180,12 +180,13 @@ if ($coverPath === '' && $coverId > 0) {
         <div class="a-panel__head"><h2 class="a-panel__title">Gambar Sampul</h2></div>
         <div class="a-panel__body">
           <div class="a-cover-preview" id="cover-preview" <?= $coverPath === '' ? 'hidden' : '' ?>>
-            <img id="cover-preview-img" src="<?= e($coverPath) ?>" alt="">
+            <img data-preview-image src="<?= e($coverPath) ?>" alt="">
           </div>
           <div class="a-actions">
-            <button class="a-btn a-btn--ghost a-btn--sm" type="button" data-open-media="cover">Pilih gambar</button>
-            <button class="a-btn a-btn--ghost a-btn--sm" type="button" id="cover-clear"
-                    <?= $coverPath === '' ? 'hidden' : '' ?>>Hapus</button>
+            <button class="a-btn a-btn--ghost a-btn--sm" type="button"
+                    data-open-media="cover_media_id" data-media-kind="image">Pilih gambar</button>
+            <button class="a-btn a-btn--ghost a-btn--sm" type="button"
+                    data-clear-media="cover_media_id" <?= $coverPath === '' ? 'hidden' : '' ?>>Hapus</button>
           </div>
         </div>
       </div>
@@ -194,40 +195,11 @@ if ($coverPath === '' && $coverId > 0) {
   </div>
 </form>
 
-<!-- ---- media picker ---- -->
-<div class="a-modal" id="media-modal" role="dialog" aria-modal="true" aria-labelledby="media-modal-title">
-  <div class="a-modal__backdrop" data-close-media></div>
-  <div class="a-modal__panel">
-    <div class="a-modal__head">
-      <h2 class="a-panel__title" id="media-modal-title">Pustaka Media</h2>
-      <div class="a-actions">
-        <input class="a-input" type="search" id="media-search" placeholder="Cari berkas…" style="width:200px">
-        <label class="a-btn a-btn--ghost a-btn--sm" style="cursor:pointer">
-          Unggah
-          <input type="file" id="media-upload" accept="image/*" hidden>
-        </label>
-        <button class="a-btn a-btn--ghost a-btn--sm" type="button" data-close-media>Tutup</button>
-      </div>
-    </div>
-    <div class="a-modal__body">
-      <div class="a-notice a-notice--error" id="media-error" hidden></div>
-      <div class="a-media-grid" id="media-grid"></div>
-      <div class="a-empty" id="media-empty" hidden>Belum ada berkas.</div>
-    </div>
-  </div>
-</div>
-
 <?php ob_start(); ?>
 <script src="<?= e(asset('assets/vendor/tinymce/tinymce.min.js')) ?>"></script>
 <script>
 (function () {
     'use strict';
-
-    var routes = {
-        browse: <?= json_encode($router->url('admin.media.browse')) ?>,
-        upload: <?= json_encode($router->url('admin.media.store')) ?>
-    };
-    var csrf = <?= json_encode(csrf_token()) ?>;
 
     /* ---- locale tabs -------------------------------------------------- */
 
@@ -257,134 +229,6 @@ if ($coverPath === '' && $coverId > 0) {
     statusSelect.addEventListener('change', syncStatus);
     syncStatus();
 
-    /* ---- media picker -------------------------------------------------- */
-
-    var modal    = document.getElementById('media-modal');
-    var grid     = document.getElementById('media-grid');
-    var empty    = document.getElementById('media-empty');
-    var errorBox = document.getElementById('media-error');
-    var search   = document.getElementById('media-search');
-    var target   = null;   // 'cover' or a TinyMCE callback
-    var timer    = null;
-
-    function showError(message) {
-        errorBox.textContent = message;
-        errorBox.hidden = !message;
-    }
-
-    function openModal(mode) {
-        target = mode;
-        modal.classList.add('is-open');
-        showError('');
-        load(search.value);
-    }
-
-    function closeModal() {
-        modal.classList.remove('is-open');
-        target = null;
-    }
-
-    document.querySelectorAll('[data-open-media]').forEach(function (button) {
-        button.addEventListener('click', function () { openModal(button.dataset.openMedia); });
-    });
-    document.querySelectorAll('[data-close-media]').forEach(function (button) {
-        button.addEventListener('click', closeModal);
-    });
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) { closeModal(); }
-    });
-
-    function load(query) {
-        fetch(routes.browse + '?q=' + encodeURIComponent(query || ''), {
-            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-            credentials: 'same-origin'
-        })
-        .then(function (r) { return r.json(); })
-        .then(function (data) { render(data.items || []); })
-        .catch(function () { showError('Gagal memuat pustaka media.'); });
-    }
-
-    function render(items) {
-        grid.innerHTML = '';
-        empty.hidden = items.length > 0;
-
-        items.forEach(function (item) {
-            var figure = document.createElement('button');
-            figure.type = 'button';
-            figure.className = 'a-media';
-
-            var img = document.createElement('img');
-            img.src = item.path;
-            img.alt = item.alt || item.filename;
-            img.loading = 'lazy';
-
-            var meta = document.createElement('div');
-            meta.className = 'a-media__meta';
-            var name = document.createElement('strong');
-            name.textContent = item.filename;
-            meta.appendChild(name);
-            if (item.width && item.height) {
-                meta.appendChild(document.createTextNode(item.width + ' × ' + item.height));
-            }
-
-            figure.appendChild(img);
-            figure.appendChild(meta);
-            figure.addEventListener('click', function () { choose(item); });
-            grid.appendChild(figure);
-        });
-    }
-
-    function choose(item) {
-        if (target === 'cover') {
-            document.getElementById('cover_media_id').value = item.id;
-            document.getElementById('cover-preview-img').src = item.path;
-            document.getElementById('cover-preview').hidden = false;
-            document.getElementById('cover-clear').hidden = false;
-        } else if (typeof target === 'function') {
-            target(item.path, { alt: item.alt || item.filename });
-        }
-        closeModal();
-    }
-
-    search.addEventListener('input', function () {
-        window.clearTimeout(timer);
-        timer = window.setTimeout(function () { load(search.value); }, 250);
-    });
-
-    document.getElementById('media-upload').addEventListener('change', function (event) {
-        var file = event.target.files && event.target.files[0];
-        if (!file) { return; }
-
-        var body = new FormData();
-        body.append('file', file);
-        body.append('_token', csrf);
-
-        showError('');
-
-        fetch(routes.upload, {
-            method: 'POST',
-            body: body,
-            headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-            credentials: 'same-origin'
-        })
-        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
-        .then(function (result) {
-            if (!result.ok || !result.data.ok) {
-                showError(result.data.message || 'Gagal mengunggah berkas.');
-                return;
-            }
-            event.target.value = '';
-            load(search.value);
-        })
-        .catch(function () { showError('Gagal mengunggah berkas.'); });
-    });
-
-    document.getElementById('cover-clear').addEventListener('click', function () {
-        document.getElementById('cover_media_id').value = 0;
-        document.getElementById('cover-preview').hidden = true;
-        this.hidden = true;
-    });
-
     /* ---- rich text ----------------------------------------------------- */
 
     tinymce.init({
@@ -407,13 +251,18 @@ if ($coverPath === '' && $coverId > 0) {
             + 'th[colspan|rowspan|scope],td[colspan|rowspan],hr,div[class],span[class]',
         content_style: 'body{font-family:Archivo,system-ui,sans-serif;font-size:16px;line-height:1.7;color:#2C3833}',
         convert_urls: false,
-        // Route the editor's image button through our own media library rather
-        // than letting it upload unmanaged files.
+        // Route the editor's image button through the shared media library
+        // rather than letting it upload unmanaged files.
         file_picker_types: 'image',
         file_picker_callback: function (callback) {
-            openModal(callback);
+            window.MktrMediaPicker.open({
+                kind: 'image',
+                onPick: function (item) {
+                    callback(item.path, { alt: item.alt || item.filename });
+                }
+            });
         }
     });
 })();
 </script>
-<?php $scripts = ob_get_clean(); ?>
+<?php $scripts = partial('partials.admin.media-picker') . ob_get_clean(); ?>

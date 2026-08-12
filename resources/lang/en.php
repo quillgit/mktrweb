@@ -23,6 +23,11 @@ return [
     'news.published_on' => 'Published',
     'news.back'        => 'Back to News',
 
+    'documents.year'      => 'Year',
+    'documents.all_years' => 'All',
+    'documents.download'  => 'Download',
+    'documents.empty'     => 'No documents have been published in this category yet.',
+
     'common.skip'      => 'Skip to main content',
     'common.search'    => 'Search',
     'common.page'      => 'Page',

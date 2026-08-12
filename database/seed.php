@@ -196,3 +196,120 @@ foreach ($posts as $index => $post) {
         );
     }
 }
+
+/* ---- investor documents ------------------------------------------------ */
+/*
+ * Points at PDFs and cover images that already exist in the repository, so the
+ * seeded pages render real reports rather than placeholders. Media rows are
+ * registered as external: deleting them must never unlink the source files.
+ */
+
+$documentSeeds = [
+    // [category slug, ID title, EN title, pdf, cover, date, status]
+    ['laporan-tahunan', 'Laporan Tahunan 2024', 'Annual Report 2024',
+     '/dokumen/134Report-PT-Menthobi-Karyatama-Raya-YE-2024.pdf', '/images/post/603AR-2024.png', '2025-04-28', 'published'],
+    ['laporan-tahunan', 'Laporan Tahunan 2023', 'Annual Report 2023',
+     '/dokumen/10520230907-Risalah-RUPS.pdf', '/images/post/648AR-2023.png', '2024-04-25', 'published'],
+    ['laporan-keberlanjutan', 'Laporan Keberlanjutan 2024', 'Sustainability Report 2024',
+     '/dokumen/110SR-MKTR-2024-(280425)-RUPS.pdf', '/images/post/52SR-2024.png', '2025-04-28', 'published'],
+    ['laporan-keberlanjutan', 'Laporan Keberlanjutan 2023', 'Sustainability Report 2023',
+     '/dokumen/110SR-MKTR-2024-(280425)-RUPS.pdf', '/images/post/480SR-2023.png', '2024-04-26', 'published'],
+    ['keterbukaan-informasi', 'Penyampaian Laporan Keuangan Interim', 'Submission of Interim Financial Statements',
+     '/dokumen/15920241105-Penyampaian-Laporan-Keuangan.pdf', null, '2024-11-05', 'published'],
+    ['keterbukaan-informasi', 'Pencatatan Saham', 'Share Listing',
+     '/dokumen/11220241216-Pencatatan-Saham.pdf', null, '2024-12-16', 'published'],
+    ['keterbukaan-informasi', 'Laporan Bulanan Pemegang Efek', 'Monthly Securities Holders Report',
+     '/dokumen/15020230803-Laporan-Bulanan-Pemegang-Efek.pdf', null, '2023-08-03', 'published'],
+    ['presentasi-perusahaan', 'Paparan Publik Tahunan', 'Annual Public Expose',
+     '/dokumen/106CONTOH-PAPARAN-PUBLIK.pdf', '/images/post/746contoh-paparan-publik.png', '2025-06-10', 'published'],
+    // Not visible on the front-end — proves the workflow filters, as with posts.
+    ['laporan-keuangan', 'Laporan Keuangan Kuartal Berjalan (draf)', 'Current Quarter Financial Report (draft)',
+     '/dokumen/15920241105-Penyampaian-Laporan-Keuangan.pdf', null, '2026-01-31', 'draft'],
+];
+
+$categoryIds = [];
+foreach ($db->select('SELECT id, slug FROM document_categories') as $row) {
+    $categoryIds[(string) $row['slug']] = (int) $row['id'];
+}
+
+$registerExternal = function (?string $path, string $kind) use ($db, $now, $adminId) {
+    if ($path === null) {
+        return null;
+    }
+
+    $existing = $db->selectOne('SELECT id FROM media WHERE path = ? LIMIT 1', [$path]);
+    if ($existing !== null) {
+        return (int) $existing['id'];
+    }
+
+    $absolute = BASE_DIR . $path;
+    $size     = is_file($absolute) ? (int) filesize($absolute) : 0;
+    $width    = null;
+    $height   = null;
+
+    if ($kind === 'image' && is_file($absolute)) {
+        $info = @getimagesize($absolute);
+        if ($info !== false) {
+            $width  = (int) $info[0];
+            $height = (int) $info[1];
+        }
+    }
+
+    return $db->insert(
+        'INSERT INTO media (path, filename, mime, kind, size, width, height, alt, folder, is_external, uploaded_by, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)',
+        [
+            $path,
+            basename($path),
+            $kind === 'image' ? 'image/jpeg' : 'application/pdf',
+            $kind,
+            $size,
+            $width,
+            $height,
+            null,
+            'seed',
+            $adminId,
+            $now,
+        ]
+    );
+};
+
+foreach ($documentSeeds as $index => $seed) {
+    list($slug, $titleId, $titleEn, $pdf, $cover, $date, $docStatus) = $seed;
+
+    if (!isset($categoryIds[$slug])) {
+        continue;
+    }
+
+    $ref      = 'seed:' . $slug . ':' . $index;
+    $fileId   = $registerExternal($pdf, 'document');
+    $coverId  = $registerExternal($cover, 'image');
+    $existing = $db->selectOne('SELECT id FROM documents WHERE legacy_ref = ? LIMIT 1', [$ref]);
+
+    $publishedAt = $docStatus === 'published' ? $date . ' 09:00:00' : null;
+
+    if ($existing === null) {
+        $documentId = $db->insert(
+            'INSERT INTO documents
+                (category_id, file_media_id, cover_media_id, document_date, year, sort, status, published_at, legacy_ref, created_at, updated_at)
+             VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?)',
+            [$categoryIds[$slug], $fileId, $coverId, $date, (int) date('Y', (int) strtotime($date)), $docStatus, $publishedAt, $ref, $now, $now]
+        );
+    } else {
+        $documentId = (int) $existing['id'];
+        $db->affected(
+            'UPDATE documents SET category_id = ?, file_media_id = ?, cover_media_id = ?, document_date = ?,
+                    year = ?, status = ?, published_at = ?, updated_at = ? WHERE id = ?',
+            [$categoryIds[$slug], $fileId, $coverId, $date, (int) date('Y', (int) strtotime($date)), $docStatus, $publishedAt, $now, $documentId]
+        );
+    }
+
+    foreach (['id' => $titleId, 'en' => $titleEn] as $localeCode => $title) {
+        $db->run(
+            'INSERT INTO document_translations (document_id, locale, title, description)
+             VALUES (?, ?, ?, NULL)
+             ON DUPLICATE KEY UPDATE title = VALUES(title)',
+            [$documentId, $localeCode, $title]
+        );
+    }
+}

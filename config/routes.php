@@ -22,6 +22,11 @@ return function (Router $router) {
     // Signed preview of unpublished content.
     $router->get('/preview/{token}', 'Mktr\Controllers\Front\PreviewController@show', 'preview.show');
 
+    /* ---- front: investor documents -------------------------------------- */
+
+    $router->get('/hubungan_investor/{slug}', 'Mktr\Controllers\Front\DocumentController@category', 'documents.category');
+    $router->get('/dokumen/{id}/{slug}', 'Mktr\Controllers\Front\DocumentController@download', 'documents.download');
+
     /* ---- admin ----------------------------------------------------------- */
 
     $router->get('/admin/login', 'Mktr\Controllers\Admin\AuthController@showLogin', 'admin.login');
@@ -38,6 +43,13 @@ return function (Router $router) {
     $router->post('/admin/posts/{id}/delete', 'Mktr\Controllers\Admin\PostController@destroy', 'admin.posts.destroy');
     $router->get('/admin/posts/{id}/revisions', 'Mktr\Controllers\Admin\PostController@revisions', 'admin.posts.revisions');
     $router->post('/admin/posts/{id}/revisions/{revision_id}/restore', 'Mktr\Controllers\Admin\PostController@restore', 'admin.posts.restore');
+
+    $router->get('/admin/documents', 'Mktr\Controllers\Admin\DocumentController@index', 'admin.documents.index');
+    $router->get('/admin/documents/create', 'Mktr\Controllers\Admin\DocumentController@create', 'admin.documents.create');
+    $router->post('/admin/documents', 'Mktr\Controllers\Admin\DocumentController@store', 'admin.documents.store');
+    $router->get('/admin/documents/{id}/edit', 'Mktr\Controllers\Admin\DocumentController@edit', 'admin.documents.edit');
+    $router->post('/admin/documents/{id}', 'Mktr\Controllers\Admin\DocumentController@update', 'admin.documents.update');
+    $router->post('/admin/documents/{id}/delete', 'Mktr\Controllers\Admin\DocumentController@destroy', 'admin.documents.destroy');
 
     $router->get('/admin/media', 'Mktr\Controllers\Admin\MediaController@index', 'admin.media.index');
     $router->post('/admin/media', 'Mktr\Controllers\Admin\MediaController@store', 'admin.media.store');

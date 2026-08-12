@@ -61,8 +61,11 @@ class MediaController extends AdminController
             (string) Config::get('app.media.public_prefix')
         );
 
+        // 'document' accepts PDFs only; anything else falls back to images.
+        $kind = $this->request->text('kind') === 'document' ? 'document' : 'image';
+
         try {
-            $stored = $uploader->store($file, 'image');
+            $stored = $uploader->store($file, $kind);
         } catch (\RuntimeException $e) {
             return $this->respond(false, $e->getMessage(), null);
         }
@@ -72,6 +75,7 @@ class MediaController extends AdminController
             'path'        => $stored['path'],
             'filename'    => $stored['filename'],
             'mime'        => $stored['mime'],
+            'kind'        => $kind,
             'size'        => $stored['size'],
             'width'       => $stored['width'],
             'height'      => $stored['height'],
@@ -100,13 +104,15 @@ class MediaController extends AdminController
 
         if ($item !== null) {
             /*
-             * Only remove the file when it lives under the managed upload path.
-             * Seeded rows point at pre-existing repository images, which must
-             * not be deleted from disk.
+             * Rows flagged is_external point at files that already existed in
+             * the repository (images/, dokumen/) and were only registered by
+             * the importer — removing the row must never delete those. Only
+             * files this CMS uploaded, under the managed prefix, are unlinked.
              */
-            $prefix = (string) Config::get('app.media.public_prefix');
+            $prefix   = (string) Config::get('app.media.public_prefix');
+            $external = isset($item['is_external']) && (int) $item['is_external'] === 1;
 
-            if (strpos((string) $item['path'], $prefix . '/') === 0) {
+            if (!$external && strpos((string) $item['path'], $prefix . '/') === 0) {
                 $absolute = BASE_DIR . $item['path'];
                 if (is_file($absolute)) {
                     @unlink($absolute);
@@ -133,10 +139,11 @@ class MediaController extends AdminController
 
         $media  = new Media();
         $search = $this->request->text('q');
+        $kind   = $this->request->text('kind');
         $page   = max(1, $this->request->int('page', 1));
         $limit  = 24;
 
-        $items = $media->paginate($limit, ($page - 1) * $limit, $search);
+        $items = $media->paginate($limit, ($page - 1) * $limit, $search, $kind);
 
         return Response::json([
             'items' => array_map(function (array $row) {
@@ -144,12 +151,14 @@ class MediaController extends AdminController
                     'id'       => (int) $row['id'],
                     'path'     => $row['path'],
                     'filename' => $row['filename'],
+                    'kind'     => $row['kind'],
                     'alt'      => $row['alt'],
+                    'size'     => (int) $row['size'],
                     'width'    => $row['width'] !== null ? (int) $row['width'] : null,
                     'height'   => $row['height'] !== null ? (int) $row['height'] : null,
                 ];
             }, $items),
-            'total' => $media->countMatching($search),
+            'total' => $media->countMatching($search, $kind),
         ]);
     }
 

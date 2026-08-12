@@ -23,6 +23,11 @@ return [
     'news.published_on' => 'Dipublikasikan',
     'news.back'        => 'Kembali ke Berita',
 
+    'documents.year'      => 'Tahun',
+    'documents.all_years' => 'Semua',
+    'documents.download'  => 'Unduh',
+    'documents.empty'     => 'Belum ada dokumen yang dipublikasikan pada kategori ini.',
+
     'common.skip'      => 'Lewati ke konten utama',
     'common.search'    => 'Cari',
     'common.page'      => 'Halaman',

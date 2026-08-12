@@ -294,6 +294,36 @@ vendor or template code. Put new styling there; do not edit the template sheets.
 
 ---
 
+## 8b. The rebuild (`/v2`)
+
+A replacement application runs alongside this one at `/v2`, sharing the webroot but nothing else.
+It is documented here so the two are not confused.
+
+| | Legacy (this document) | Rebuild |
+|---|---|---|
+| Entry | `index.php` at the root | `v2/index.php` front controller |
+| Routing | `konten()` if/else | route table in `config/routes.php` |
+| Database | `mysql_*`, interpolated SQL | PDO, prepared statements |
+| Languages | `en/` fork of the whole app | locale URL prefix, one codebase |
+| Admin | `adminpanel/` | `/v2/admin` |
+
+Shipped so far: News and Investor Documents, plus the media library, authentication with roles,
+draft/scheduled/published workflow, signed previews and revision history.
+
+**Investor documents.** One `documents` table replaces the 19 `tabel_laporan_*` tables, and one
+admin screen replaces the 20 `adminpanel/modules/laporan_*.php` modules. `document_categories.layout`
+(`list` or `cover-grid`) reproduces the two presentations that `module/hubungan_investor.php`
+hardcoded per slug, so a new report type is a row rather than a new table, module and code branch.
+
+**Legacy import.** `database/import/` reads this database read-only and writes the new schema. It
+introspects each source table rather than assuming columns, because the `tabel_laporan_*` tables
+disagree with one another (`laporan_date` on some, `gambar` on others, `sub_title` on one). Every
+imported row carries a `legacy_ref` of `<source table>:<source id>` under a unique index, so the
+import is idempotent and traceable. Run `php database/import/run.php --dry-run` first; it prints a
+reconciliation report that must balance before cutover.
+
+---
+
 ## 9. Known issues
 
 ### Fixed in the current pass
