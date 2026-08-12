@@ -15,6 +15,22 @@ return [
     'nav.career'       => 'Career',
     'nav.contact'      => 'Contact Us',
 
+    'nav.milestones'   => 'Milestones',
+    'nav.commissioners' => 'Board of Commissioners',
+    'nav.directors'    => 'Board of Directors',
+    'nav.subsidiaries' => 'Our Subsidiaries',
+    'nav.awards'       => 'Awards & Recognition',
+    'nav.memberships'  => 'Memberships',
+
+    'collections.empty'       => 'Nothing has been published yet.',
+    'collections.management'  => 'Our Management',
+    'collections.others'      => 'Other Members',
+    'collections.zoom'        => 'Click the image to enlarge',
+    'collections.association' => 'Association',
+    'collections.assoc_status' => 'Membership Status',
+    'collections.link'        => 'Link',
+    'collections.visit'       => 'Visit',
+
     'news.title'       => 'News & Events',
     'news.subtitle'    => 'Latest information on the Company\'s activities and achievements',
     'news.read_more'   => 'Read more',

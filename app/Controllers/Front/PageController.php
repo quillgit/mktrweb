@@ -9,6 +9,7 @@ use Mktr\Core\Response;
 use Mktr\Models\Document;
 use Mktr\Models\Grievance;
 use Mktr\Models\Page;
+use Mktr\Support\SectionMenu;
 
 /**
  * Content pages.
@@ -76,7 +77,12 @@ class PageController extends Controller
         $shared = [
             'page'        => $page,
             'section'     => $section,
-            'sectionTree' => $pages->sectionTree($section, $locale, $fallback),
+            'navItems'    => SectionMenu::forSection(
+                $this->router,
+                $section,
+                $pages->sectionTree($section, $locale, $fallback)
+            ),
+            'activeKey'   => SectionMenu::pageKey((int) $page['id']),
             'title'       => ($page['meta_title'] !== null && $page['meta_title'] !== ''
                                 ? $page['meta_title']
                                 : $page['title']) . ' — ' . __('site.name'),

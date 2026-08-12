@@ -15,6 +15,22 @@ return [
     'nav.career'       => 'Karir',
     'nav.contact'      => 'Kontak Kami',
 
+    'nav.milestones'   => 'Peristiwa Penting',
+    'nav.commissioners' => 'Dewan Komisaris',
+    'nav.directors'    => 'Direksi',
+    'nav.subsidiaries' => 'Anak Perusahaan Kami',
+    'nav.awards'       => 'Penghargaan & Pengakuan',
+    'nav.memberships'  => 'Keanggotaan',
+
+    'collections.empty'       => 'Belum ada data yang dipublikasikan.',
+    'collections.management'  => 'Manajemen Kami',
+    'collections.others'      => 'Manajemen Lainnya',
+    'collections.zoom'        => 'Klik gambar untuk memperbesar',
+    'collections.association' => 'Asosiasi',
+    'collections.assoc_status' => 'Status Asosiasi',
+    'collections.link'        => 'Tautan',
+    'collections.visit'       => 'Kunjungi',
+
     'news.title'       => 'Berita & Kegiatan',
     'news.subtitle'    => 'Informasi terkini seputar kegiatan dan pencapaian Perseroan',
     'news.read_more'   => 'Selengkapnya',

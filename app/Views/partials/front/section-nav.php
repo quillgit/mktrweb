@@ -3,34 +3,14 @@
  * Sidebar navigation for the current section.
  *
  * The legacy site hardcoded this list in every sibling module, so adding a page
- * meant editing a dozen files. Here it comes from the pages table.
+ * meant editing a dozen files. Here it is one partial over a normalised menu
+ * built by Mktr\Support\SectionMenu — which is also what the header renders,
+ * so the two can no longer drift apart.
  *
- * @var array  $sectionTree flat rows ordered parent-then-children
- * @var array  $page        the current page
+ * @var array  $navItems  [['key','title','url','children'], …]
+ * @var string $activeKey key of the entry to mark current
  * @var string $section
- * @var \Mktr\Core\Router $router
  */
-
-$routeFor = function (array $item) use ($router, $section) {
-    $slug = (string) $item['locale_slug'];
-
-    if ($section === 'about') {
-        $base = rtrim((string) config('app.base_path', ''), '/');
-        $lang = locale() !== (string) config('app.default_locale', 'id') ? '/' . locale() : '';
-
-        return $base . $lang . '/' . $slug;
-    }
-
-    return $router->url('pages.' . $section, ['slug' => $slug]);
-};
-
-/** Group children under their parent so the list renders as a tree. */
-$children = [];
-foreach ($sectionTree as $item) {
-    if ($item['parent_id'] !== null) {
-        $children[(int) $item['parent_id']][] = $item;
-    }
-}
 
 $labels = [
     'about'          => __('nav.about'),
@@ -40,25 +20,25 @@ $labels = [
     'investor'       => __('nav.investor'),
     'hr'             => __('nav.hr'),
 ];
+$label = isset($labels[$section]) ? $labels[$section] : $section;
 ?>
-<nav class="c-sidenav" aria-label="<?= e(isset($labels[$section]) ? $labels[$section] : $section) ?>">
-  <h2 class="c-sidenav__title"><?= e(isset($labels[$section]) ? $labels[$section] : $section) ?></h2>
+<nav class="c-sidenav" aria-label="<?= e($label) ?>">
+  <h2 class="c-sidenav__title"><?= e($label) ?></h2>
   <ul class="c-sidenav__list">
-    <?php foreach ($sectionTree as $item): ?>
-      <?php if ($item['parent_id'] !== null) { continue; } ?>
-      <?php $isCurrent = (int) $item['id'] === (int) $page['id']; ?>
+    <?php foreach ($navItems as $item): ?>
+      <?php $isCurrent = $item['key'] === $activeKey; ?>
       <li>
         <a class="c-sidenav__link<?= $isCurrent ? ' is-active' : '' ?>"
-           href="<?= e($routeFor($item)) ?>"
+           href="<?= e($item['url']) ?>"
            <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e($item['title']) ?></a>
 
-        <?php if (isset($children[(int) $item['id']])): ?>
+        <?php if ($item['children'] !== []): ?>
           <ul class="c-sidenav__sub">
-            <?php foreach ($children[(int) $item['id']] as $child): ?>
-              <?php $childCurrent = (int) $child['id'] === (int) $page['id']; ?>
+            <?php foreach ($item['children'] as $child): ?>
+              <?php $childCurrent = $child['key'] === $activeKey; ?>
               <li>
                 <a class="c-sidenav__link c-sidenav__link--child<?= $childCurrent ? ' is-active' : '' ?>"
-                   href="<?= e($routeFor($child)) ?>"
+                   href="<?= e($child['url']) ?>"
                    <?= $childCurrent ? 'aria-current="page"' : '' ?>><?= e($child['title']) ?></a>
               </li>
             <?php endforeach; ?>

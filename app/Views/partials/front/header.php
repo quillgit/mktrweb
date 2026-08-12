@@ -36,25 +36,34 @@ $nav = (new \Mktr\Models\Page())->navigation(
     (string) config('app.default_locale', 'id')
 );
 
-/** Section => [label, url prefix, route name]. Order matches the legacy menu. */
+/** Section => [label, url prefix]. Order matches the legacy menu. */
 $sections = [
-    'about'          => [__('nav.about'),          '',                        null],
-    'business'       => [__('nav.business'),       '/bisnis',                 'pages.business'],
-    'sustainability' => [__('nav.sustainability'), '/keberlanjutan',          'pages.sustainability'],
-    'governance'     => [__('nav.governance'),     '/tatakelola_perusahaan',  'pages.governance'],
-    'investor'       => [__('nav.investor'),       '/hubungan_investor',      'pages.investor'],
-    'hr'             => [__('nav.hr'),             '/sdm',                    'pages.hr'],
+    'about'          => [__('nav.about'),          ''],
+    'business'       => [__('nav.business'),       '/bisnis'],
+    'sustainability' => [__('nav.sustainability'), '/keberlanjutan'],
+    'governance'     => [__('nav.governance'),     '/tatakelola_perusahaan'],
+    'investor'       => [__('nav.investor'),       '/hubungan_investor'],
+    'hr'             => [__('nav.hr'),             '/sdm'],
 ];
 
-$urlFor = function (string $section, array $item) use ($router, $sections, $base, $locale) {
-    if ($section === 'about') {
-        $lang = $locale !== (string) config('app.default_locale', 'id') ? '/' . $locale : '';
+/*
+ * The menu is normalised by SectionMenu, which is also what the sidebar uses.
+ * That matters for `about`, where the section mixes CMS pages with the six
+ * fixed collection routes; the legacy site kept eleven hand-maintained copies
+ * of that list.
+ */
+$menus = [];
+foreach ($sections as $key => $meta) {
+    $menus[$key] = \Mktr\Support\SectionMenu::forSection(
+        $router,
+        $key,
+        isset($nav[$key]) ? $nav[$key] : []
+    );
+}
 
-        return $base . $lang . '/' . $item['locale_slug'];
-    }
-
-    return $router->url($sections[$section][2], ['slug' => $item['locale_slug']]);
-};
+/** Paths owned by the about section that are not `/{page-slug}`. */
+$aboutPaths = ['/peristiwa_penting', '/dewan_komisaris', '/direksi', '/mktr_so',
+               '/anak_perusahaan_kami', '/penghargaan', '/keanggotaan'];
 
 $isNews = strpos($relative, '/berita') === 0 || strpos($relative, '/read/') === 0;
 
@@ -96,20 +105,22 @@ foreach ((array) config('app.locales', ['id']) as $code) {
     <nav class="c-nav" id="primary-nav" aria-label="Navigasi utama">
       <?php foreach ($sections as $key => $meta): ?>
         <?php
-        $items = isset($nav[$key]) ? $nav[$key] : [];
+        $items = $menus[$key];
         if ($items === []) {
             continue;
         }
 
-        // Group children under their parent for the dropdown.
-        $children = [];
-        foreach ($items as $item) {
-            if ($item['parent_id'] !== null) {
-                $children[(int) $item['parent_id']][] = $item;
+        if ($key === 'about') {
+            $active = false;
+            foreach ($aboutPaths as $path) {
+                if (strpos($relative, $path) === 0) {
+                    $active = true;
+                    break;
+                }
             }
+        } else {
+            $active = strpos($relative, $meta[1]) === 0;
         }
-
-        $active = $meta[1] !== '' && strpos($relative, $meta[1]) === 0;
         ?>
         <div class="c-navitem">
           <button class="c-nav__link c-nav__toggle<?= $active ? ' is-active' : '' ?>"
@@ -119,13 +130,12 @@ foreach ((array) config('app.locales', ['id']) as $code) {
 
           <ul class="c-dropdown">
             <?php foreach ($items as $item): ?>
-              <?php if ($item['parent_id'] !== null) { continue; } ?>
-              <li class="<?= isset($children[(int) $item['id']]) ? 'has-children' : '' ?>">
-                <a href="<?= e($urlFor($key, $item)) ?>"><?= e($item['title']) ?></a>
-                <?php if (isset($children[(int) $item['id']])): ?>
+              <li class="<?= $item['children'] !== [] ? 'has-children' : '' ?>">
+                <a href="<?= e($item['url']) ?>"><?= e($item['title']) ?></a>
+                <?php if ($item['children'] !== []): ?>
                   <ul class="c-dropdown c-dropdown--sub">
-                    <?php foreach ($children[(int) $item['id']] as $child): ?>
-                      <li><a href="<?= e($urlFor($key, $child)) ?>"><?= e($child['title']) ?></a></li>
+                    <?php foreach ($item['children'] as $child): ?>
+                      <li><a href="<?= e($child['url']) ?>"><?= e($child['title']) ?></a></li>
                     <?php endforeach; ?>
                   </ul>
                 <?php endif; ?>

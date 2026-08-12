@@ -34,6 +34,15 @@ return [
     'base_path' => (string) $env('APP_BASE_PATH', '/v2'),
 
     /*
+     * Prefix for static files, which is NOT base_path. assets/, images/ and
+     * dokumen/ sit at the document root and are shared with the legacy site,
+     * so they stay at /assets/... even while the application is served from
+     * /v2 — and stay there unchanged after cutover. Media paths stored in the
+     * database are already root-relative and follow the same rule.
+     */
+    'asset_base' => (string) $env('APP_ASSET_BASE', ''),
+
+    /*
      * Signing key for session fingerprints and preview tokens.
      * MUST be overridden in production via the APP_KEY environment variable.
      */

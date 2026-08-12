@@ -3,7 +3,8 @@
  * Content page rendering a document listing.
  *
  * @var array $page
- * @var array $sectionTree
+ * @var array $navItems
+ * @var string $activeKey
  * @var array $documents
  * @var int[] $years
  * @var int|null $activeYear
@@ -21,7 +22,7 @@ $pageUrl = $section === 'about'
   <div class="u-container c-pagelayout">
     <aside class="c-pagelayout__side">
       <?= partial('partials.front.section-nav', [
-          'sectionTree' => $sectionTree, 'page' => $page, 'section' => $section, 'router' => $router,
+          'navItems' => $navItems, 'activeKey' => $activeKey, 'section' => $section,
       ]) ?>
     </aside>
 

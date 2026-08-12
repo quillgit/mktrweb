@@ -41,9 +41,14 @@ if (!function_exists('config')) {
 }
 
 if (!function_exists('asset')) {
+    /**
+     * URL for a static file. Deliberately not base_path: assets live at the
+     * document root, shared with the legacy site, while the application is
+     * served from /v2.
+     */
     function asset(string $path): string
     {
-        $base = rtrim((string) Config::get('app.base_path', ''), '/');
+        $base = rtrim((string) Config::get('app.asset_base', ''), '/');
 
         return $base . '/' . ltrim($path, '/');
     }

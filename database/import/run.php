@@ -27,7 +27,9 @@ require __DIR__ . '/DocumentsImporter.php';
 require __DIR__ . '/PostsImporter.php';
 require __DIR__ . '/PagesImporter.php';
 require __DIR__ . '/JobsImporter.php';
+require __DIR__ . '/CollectionsImporter.php';
 
+use Mktr\Import\CollectionsImporter;
 use Mktr\Import\DocumentsImporter;
 use Mktr\Import\JobsImporter;
 use Mktr\Import\PagesImporter;
@@ -48,6 +50,7 @@ $available = [
     'posts'     => PostsImporter::class,
     'pages'     => PagesImporter::class,
     'jobs'      => JobsImporter::class,
+    'collections' => CollectionsImporter::class,
 ];
 
 if ($only !== '' && !isset($available[$only])) {

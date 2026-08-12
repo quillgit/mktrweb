@@ -29,9 +29,24 @@ return function (Router $router) {
      * the slug from the path.
      */
     foreach (['profil_kami', 'logo_kami', 'visi_misi', 'struktur_kepemilikan',
-              'struktur_group', 'struktur_organisasi', 'keanggotaan'] as $aboutSlug) {
+              'struktur_group', 'struktur_organisasi'] as $aboutSlug) {
         $router->get('/' . $aboutSlug, 'Mktr\Controllers\Front\PageController@about', 'pages.' . $aboutSlug);
     }
+
+    /* ---- front: about collections ---------------------------------------- */
+    /*
+     * These seven paths belong to the about section but are backed by
+     * collection_items rather than a page row, exactly as in the legacy site:
+     * /keanggotaan renders tabel_keanggotaan (the about_us row of the same
+     * slug is only its intro prose), not a content page.
+     */
+    $router->get('/peristiwa_penting', 'Mktr\Controllers\Front\CollectionController@milestones', 'collections.milestones');
+    $router->get('/dewan_komisaris', 'Mktr\Controllers\Front\CollectionController@commissioners', 'collections.commissioners');
+    $router->get('/direksi', 'Mktr\Controllers\Front\CollectionController@directors', 'collections.directors');
+    $router->get('/mktr_so/{slug}', 'Mktr\Controllers\Front\CollectionController@person', 'collections.person');
+    $router->get('/anak_perusahaan_kami', 'Mktr\Controllers\Front\CollectionController@subsidiaries', 'collections.subsidiaries');
+    $router->get('/penghargaan', 'Mktr\Controllers\Front\CollectionController@awards', 'collections.awards');
+    $router->get('/keanggotaan', 'Mktr\Controllers\Front\CollectionController@memberships', 'collections.memberships');
 
     $router->get('/bisnis/{slug}', 'Mktr\Controllers\Front\PageController@business', 'pages.business');
     $router->get('/keberlanjutan/{slug}', 'Mktr\Controllers\Front\PageController@sustainability', 'pages.sustainability');
@@ -83,12 +98,23 @@ return function (Router $router) {
     $router->post('/admin/careers/{id}', 'Mktr\Controllers\Admin\CareerController@update', 'admin.careers.update');
     $router->post('/admin/careers/{id}/delete', 'Mktr\Controllers\Admin\CareerController@destroy', 'admin.careers.destroy');
 
+    $router->get('/admin/collections', 'Mktr\Controllers\Admin\CollectionController@index', 'admin.collections.index');
+    $router->get('/admin/collections/create', 'Mktr\Controllers\Admin\CollectionController@create', 'admin.collections.create');
+    $router->post('/admin/collections', 'Mktr\Controllers\Admin\CollectionController@store', 'admin.collections.store');
+    $router->get('/admin/collections/{id}/edit', 'Mktr\Controllers\Admin\CollectionController@edit', 'admin.collections.edit');
+    $router->post('/admin/collections/{id}', 'Mktr\Controllers\Admin\CollectionController@update', 'admin.collections.update');
+    $router->post('/admin/collections/{id}/delete', 'Mktr\Controllers\Admin\CollectionController@destroy', 'admin.collections.destroy');
+
     $router->get('/admin/documents', 'Mktr\Controllers\Admin\DocumentController@index', 'admin.documents.index');
     $router->get('/admin/documents/create', 'Mktr\Controllers\Admin\DocumentController@create', 'admin.documents.create');
     $router->post('/admin/documents', 'Mktr\Controllers\Admin\DocumentController@store', 'admin.documents.store');
     $router->get('/admin/documents/{id}/edit', 'Mktr\Controllers\Admin\DocumentController@edit', 'admin.documents.edit');
     $router->post('/admin/documents/{id}', 'Mktr\Controllers\Admin\DocumentController@update', 'admin.documents.update');
     $router->post('/admin/documents/{id}/delete', 'Mktr\Controllers\Admin\DocumentController@destroy', 'admin.documents.destroy');
+
+    $router->get('/admin/inquiries', 'Mktr\Controllers\Admin\InquiryController@index', 'admin.inquiries.index');
+    $router->get('/admin/inquiries/{id}', 'Mktr\Controllers\Admin\InquiryController@show', 'admin.inquiries.show');
+    $router->post('/admin/inquiries/{id}/delete', 'Mktr\Controllers\Admin\InquiryController@destroy', 'admin.inquiries.destroy');
 
     $router->get('/admin/media', 'Mktr\Controllers\Admin\MediaController@index', 'admin.media.index');
     $router->post('/admin/media', 'Mktr\Controllers\Admin\MediaController@store', 'admin.media.store');
@@ -101,12 +127,7 @@ return function (Router $router) {
      * reviewed. Patterns are recorded here so the sitemap stays visible:
      *
      *   /                              home
-     *   /profil_kami /logo_kami /visi_misi /peristiwa_penting
-     *   /struktur_kepemilikan /struktur_organisasi /dewan_komisaris /direksi
-     *   /struktur_group /anak_perusahaan_kami /penghargaan /keanggotaan
-     *   /bisnis/{slug} /keberlanjutan/{slug} /tatakelola_perusahaan/{slug}
-     *   /sdm/{slug} /hubungan_investor/{slug} /mktr_so/{slug}
-     *   /karir /apply/{id}/{slug} /kontak_kami /form_grievance
-     *   /pelaporan_pelanggaran /pencarian /cari/{slug}
+     *   /kontak_kami /form_grievance /pelaporan_pelanggaran
+     *   /pencarian /cari/{slug}
      */
 };

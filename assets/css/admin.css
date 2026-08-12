@@ -179,6 +179,18 @@ h1,h2,h3 { margin:0 0 .5em; color:var(--ink-900); line-height:1.25; letter-spaci
 .a-filter:hover { background:var(--green-100); color:var(--green-700); }
 .a-filter.is-active { background:var(--green-600); color:#fff; }
 
+/* Row thumbnail in list screens. */
+.a-thumb { width:48px; height:48px; object-fit:cover; border-radius:var(--radius-sm); background:var(--ink-100); display:block; }
+
+/* ---- inbox -------------------------------------------------------------- */
+
+.a-message { font-size:15px; line-height:1.75; color:var(--ink-700); white-space:pre-wrap; word-break:break-word; }
+
+.a-deflist { margin:0; font-size:14px; }
+.a-deflist dt { font-size:11.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-500); font-weight:700; }
+.a-deflist dd { margin:2px 0 14px; color:var(--ink-800); word-break:break-word; }
+.a-deflist dd:last-child { margin-bottom:0; }
+
 /* ---- notices ------------------------------------------------------------ */
 
 .a-notice { padding:13px 17px; border-radius:var(--radius-md); font-size:14.5px; margin-bottom:20px; border:1px solid; }

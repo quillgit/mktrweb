@@ -201,6 +201,25 @@ abstract class Importer
         $filename = basename(str_replace('\\', '/', $filename));
         $path     = '/' . trim($directory, '/') . '/' . $filename;
 
+        /*
+         * The legacy admin wrote uploads to whichever folder its module happened
+         * to use, and the folders drifted from the pages that read them — the
+         * membership logos, for instance, live in images/about even though the
+         * awards module beside them uses images/penghargaan. Rather than trust
+         * one guess, fall back to the other known upload folders before
+         * declaring a file missing.
+         */
+        if (!is_file(BASE_DIR . $path)) {
+            $found = $this->locateFile($filename, $directory);
+
+            if ($found !== null) {
+                if ($found !== $path) {
+                    $this->note(sprintf('%s: %s found in %s, not %s', $sourceTable, $filename, dirname($found), $directory));
+                }
+                $path = $found;
+            }
+        }
+
         $existing = $this->db->selectOne('SELECT id FROM media WHERE path = ? LIMIT 1', [$path]);
 
         if ($existing !== null) {
@@ -257,6 +276,36 @@ abstract class Importer
     }
 
     /**
+     * Look for a file across the known legacy upload folders.
+     *
+     * @return string|null root-relative path, or null when it is nowhere
+     */
+    protected function locateFile(string $filename, string $preferred): ?string
+    {
+        $candidates = [
+            $preferred,
+            'images/about',
+            'images/banner',
+            'images/post',
+            'images/manajemen',
+            'images/penghargaan',
+            'images/produk',
+            'images/gallery',
+            'dokumen',
+        ];
+
+        foreach ($candidates as $directory) {
+            $path = '/' . trim($directory, '/') . '/' . $filename;
+
+            if (is_file(BASE_DIR . $path)) {
+                return $path;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Map a filename extension to a MIME type, for files that already exist on
      * disk and are only being registered rather than uploaded.
      */
@@ -278,6 +327,29 @@ abstract class Importer
         $extension = strtolower((string) pathinfo($filename, PATHINFO_EXTENSION));
 
         return isset($map[$extension]) ? $map[$extension] : 'application/octet-stream';
+    }
+
+    /**
+     * Tidy a short plain-text field — a title, a name, a job role.
+     *
+     * Production carries two artefacts in these columns that show up verbatim
+     * on the page: a non-breaking space that was UTF-8 encoded twice somewhere
+     * in the legacy stack (it renders as a stray "Â"), and tabs pasted in from
+     * a spreadsheet. Bodies are left alone — they are HTML, where a
+     * non-breaking space can be deliberate.
+     */
+    protected function cleanText(?string $value): string
+    {
+        if ($value === null) {
+            return '';
+        }
+
+        $value = str_replace("\xC3\x82\xC2\xA0", ' ', $value); // double-encoded NBSP
+        $value = str_replace("\xC2\xA0", ' ', $value);         // plain NBSP
+        $value = str_replace(["\t", "\r", "\n"], ' ', $value);
+        $value = preg_replace('/ {2,}/', ' ', $value);
+
+        return trim((string) $value);
     }
 
     /**

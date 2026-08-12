@@ -3,7 +3,8 @@
  * Prose content page.
  *
  * @var array $page
- * @var array $sectionTree
+ * @var array $navItems
+ * @var string $activeKey
  * @var string $section
  */
 $layout = 'layouts.front';
@@ -14,7 +15,7 @@ $layout = 'layouts.front';
   <div class="u-container c-pagelayout">
     <aside class="c-pagelayout__side">
       <?= partial('partials.front.section-nav', [
-          'sectionTree' => $sectionTree, 'page' => $page, 'section' => $section, 'router' => $router,
+          'navItems' => $navItems, 'activeKey' => $activeKey, 'section' => $section,
       ]) ?>
     </aside>
 

@@ -7,7 +7,8 @@
  * but deliberately never queried for this view — see Mktr\Models\Grievance.
  *
  * @var array $page
- * @var array $sectionTree
+ * @var array $navItems
+ * @var string $activeKey
  * @var array $grievances
  * @var string $section
  */
@@ -26,7 +27,7 @@ $statusLabels = [
   <div class="u-container c-pagelayout">
     <aside class="c-pagelayout__side">
       <?= partial('partials.front.section-nav', [
-          'sectionTree' => $sectionTree, 'page' => $page, 'section' => $section, 'router' => $router,
+          'navItems' => $navItems, 'activeKey' => $activeKey, 'section' => $section,
       ]) ?>
     </aside>
 

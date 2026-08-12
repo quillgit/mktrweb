@@ -303,6 +303,8 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 }
 
 .c-pagehead__inner { padding: 72px 0 64px; }
+/* Detail pages already carry the name as an <h1> in the body. */
+.c-pagehead--slim .c-pagehead__inner { padding: 52px 0 46px; }
 
 .c-pagehead__title {
   color: #fff;
@@ -593,6 +595,115 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
   box-shadow: inset 3px 0 0 var(--gold-500);
 }
 
+/*------------------------------------------------------------------------------
+  10d. ABOUT COLLECTIONS
+
+  Leadership boards, subsidiaries, awards, memberships and the timeline. The
+  legacy pages built these out of Bootstrap column classes chosen per page
+  (col-xl-2 on one board, col-xl-4 on the next), which is why the same people
+  rendered at two different sizes. These are auto-fill grids, so the column
+  count follows the available width instead of the page.
+------------------------------------------------------------------------------*/
+
+/* --- leadership --- */
+.c-board { margin-bottom: 48px; }
+.c-board:last-child { margin-bottom: 0; }
+.c-board__title {
+  font-size: 22px; color: var(--green-800); margin: 0 0 22px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);
+}
+
+.c-people { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 26px; }
+
+.c-person {
+  background: var(--surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-1);
+  transition: box-shadow .25s var(--ease), transform .25s var(--ease);
+}
+.c-person:hover { box-shadow: var(--shadow-3); transform: translateY(-3px); }
+.c-person__link { display: block; color: inherit; }
+
+.c-person__photo { aspect-ratio: 3 / 4; background: var(--ink-100); overflow: hidden; }
+.c-person__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+.c-person__body { padding: 16px 18px 20px; }
+.c-person__name { font-size: 16px; line-height: 1.35; margin: 0 0 4px; color: var(--green-800); }
+.c-person__role { font-size: 13.5px; color: var(--text-muted); margin: 0; }
+
+/* --- leadership detail --- */
+.c-profile { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 48px; align-items: start; }
+.c-profile__photo {
+  border-radius: var(--radius-lg); overflow: hidden; background: var(--ink-100);
+  box-shadow: var(--shadow-2); aspect-ratio: 3 / 4;
+}
+.c-profile__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.c-profile__name { font-size: 30px; margin: 0 0 6px; color: var(--green-800); }
+.c-profile__role {
+  font-size: 15px; color: var(--gold-600); font-weight: 600; margin: 0 0 24px;
+  letter-spacing: .02em;
+}
+
+/* --- subsidiaries --- */
+.c-feature { padding-bottom: 44px; margin-bottom: 44px; border-bottom: 1px solid var(--border-subtle); }
+.c-feature:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.c-feature__title { font-size: 24px; color: var(--green-800); margin: 0 0 20px; }
+.c-feature__media { margin: 0 0 22px; border-radius: var(--radius-lg); overflow: hidden; background: var(--ink-100); }
+.c-feature__media img { width: 100%; height: auto; display: block; }
+
+/* --- awards --- */
+.c-award {
+  display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px; align-items: start;
+  padding-bottom: 40px; margin-bottom: 40px; border-bottom: 1px solid var(--border-subtle);
+}
+.c-award:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.c-award__media {
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  background: var(--surface); padding: 10px;
+}
+.c-award__media img { width: 100%; height: auto; display: block; border-radius: var(--radius-sm); }
+.c-award__title { font-size: 21px; color: var(--green-800); margin: 0 0 14px; }
+
+/* --- memberships --- */
+.c-member { display: flex; align-items: center; gap: 14px; }
+.c-member__logo { width: 64px; height: 64px; object-fit: contain; flex: 0 0 auto; }
+.c-member__name { font-weight: 600; color: var(--green-800); }
+.c-prose--compact { font-size: 14.5px; line-height: 1.6; }
+.c-prose--compact p:last-child { margin-bottom: 0; }
+.c-table--members td { vertical-align: middle; }
+
+/* --- timeline --- */
+/* One rail on the left; the alternating left/right layout of the legacy page
+   is applied from 900px up, where there is room for it. */
+.c-timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.c-timeline::before {
+  content: ""; position: absolute; top: 6px; bottom: 6px; left: 7px; width: 2px;
+  background: linear-gradient(180deg, var(--green-300), var(--green-100));
+}
+.c-timeline__item { position: relative; padding: 0 0 28px 40px; }
+.c-timeline__item:last-child { padding-bottom: 0; }
+.c-timeline__dot {
+  position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--surface); border: 3px solid var(--green-500);
+}
+.c-timeline__card {
+  background: var(--surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-1); padding: 20px 24px;
+}
+.c-timeline__year {
+  font-size: 20px; color: var(--gold-600); margin: 0 0 8px; letter-spacing: .02em;
+}
+.c-timeline__body { font-size: 15px; }
+.c-timeline__body p:last-child { margin-bottom: 0; }
+
+@media (min-width: 900px) {
+  .c-timeline::before { left: 50%; transform: translateX(-1px); }
+  .c-timeline__item { width: 50%; padding: 0 0 30px 0; }
+  .c-timeline__item:nth-child(odd) { padding-right: 38px; }
+  .c-timeline__item:nth-child(even) { margin-left: 50%; padding-left: 38px; }
+  .c-timeline__dot { left: auto; right: -8px; }
+  .c-timeline__item:nth-child(even) .c-timeline__dot { left: -8px; right: auto; }
+}
+
 /* --- data table (grievance register) --- */
 .c-tablewrap { overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); }
 .c-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 680px; }
@@ -673,6 +784,9 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 @media (max-width: 1024px) {
   .c-grid--3 { grid-template-columns: repeat(2, 1fr); }
   .c-footer__grid { grid-template-columns: repeat(2, 1fr); }
+
+  .c-profile { grid-template-columns: 240px minmax(0, 1fr); gap: 32px; }
+  .c-award { grid-template-columns: 200px minmax(0, 1fr); gap: 24px; }
 }
 
 @media (max-width: 1150px) {
@@ -722,6 +836,12 @@ hr { border: 0; border-top: 1px solid var(--border-subtle); margin: 2rem 0; }
 
   .c-btn { width: 100%; }
   .c-topbar__inner { justify-content: center; }
+
+  .c-people { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .c-profile, .c-award { grid-template-columns: 1fr; gap: 24px; }
+  .c-profile__photo { max-width: 260px; }
+  .c-award__media { max-width: 240px; }
+  .c-member { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
 /*------------------------------------------------------------------------------

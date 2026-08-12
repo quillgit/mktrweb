@@ -307,9 +307,10 @@ It is documented here so the two are not confused.
 | Languages | `en/` fork of the whole app | locale URL prefix, one codebase |
 | Admin | `adminpanel/` | `/v2/admin` |
 
-Shipped so far: Content Pages, News, Investor Documents and Careers, plus the media library,
-authentication with roles, draft/scheduled/published workflow, signed previews and revision
-history. **Production data has been imported** — 100 pages, 143 documents, 20 posts, 3 vacancies.
+Shipped so far: Content Pages, News, Investor Documents, Careers and the About collections, plus
+the media library, authentication with roles, draft/scheduled/published workflow, signed previews
+and revision history. **Production data has been imported** — 100 pages, 143 documents, 20 posts,
+3 vacancies, 34 collection items and 3 submissions.
 
 **Content pages.** One `pages` table replaces six legacy tables
 (`about_us`, `bisnis_inti`, `berkelanjutan`, `tatakelola_perusahaan`, `tentang_kami`,
@@ -330,6 +331,36 @@ fields at all.
 admin screen replaces the 20 `adminpanel/modules/laporan_*.php` modules. `document_categories.layout`
 (`list` or `cover-grid`) reproduces the two presentations that `module/hubungan_investor.php`
 hardcoded per slug, so a new report type is a row rather than a new table, module and code branch.
+
+**About collections.** Six legacy tables of the same shape — a small list of things with an image,
+a title, some body text and a link — share one `collection_items` table discriminated by `kind`
+(`leadership`, `subsidiary`, `award`, `membership`, `milestone`, `banner`), with `group_key`
+separating the two boards inside `leadership`. That replaces seven modules
+(`peristiwa_penting`, `dewan_komisaris`, `direksi`, `mktr_so`, `anak_perusahaan_kami`,
+`penghargaan`, `keanggotaan`) with one controller and one admin screen. The URLs are unchanged.
+
+`/keanggotaan` is a collection route, not a page route: the legacy page rendered
+`tabel_keanggotaan`, with the `about_us` row of the same slug supplying only the intro prose.
+That intro is still a page row, so it stays editable, and the same is true of
+`/peristiwa_penting`.
+
+**One menu, one definition.** `Mktr\Support\SectionMenu` is the only place that knows what the
+About section contains. The legacy site hardcoded that list eleven times — once in
+`configuration/function.php` and once per sibling module — and the copies had already drifted.
+The section is awkward because it mixes CMS pages with the six fixed collection routes, so the
+order is declared in `SectionMenu` and the page rows are slotted into it by slug; pages the CMS
+adds later that the order does not mention are appended rather than hidden. The header dropdown
+and every sidebar render from that one normalised list.
+
+**Submissions.** The three public forms plus the legacy `msg_inbox` land in one `inquiries`
+table: the shared fields are columns and everything form-specific is JSON in `payload`, so adding
+a form needs no migration. Submissions are never rendered publicly; `/admin/inquiries` is the only
+reader.
+
+**Assets are not under `base_path`.** `asset()` resolves against `app.asset_base` (empty), not
+`app.base_path` (`/v2`). `assets/`, `images/` and `dokumen/` sit at the document root and are
+shared with the legacy site, and media paths stored in the database are already root-relative.
+Routing under `/v2` must not drag static files with it.
 
 **Legacy import.** `database/import/` reads this database read-only and writes the new schema. It
 introspects each source table rather than assuming columns, because the `tabel_laporan_*` tables
